@@ -22,7 +22,7 @@ bibtex_bibfiles:
 repository:
   url: https://github.com/executablebooks/jupyter-book # Online location of book
   path_to_book: docs # Optional - Path to the book relative to the repo root
-  branch: main       # Optional - Branch of the repo that should be used when creating links
+  branch: master     # Optional - Branch of the repo that should be used when creating links
 
 # Add GitHub buttons to your book
 html:
