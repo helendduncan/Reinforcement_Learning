@@ -13,3 +13,24 @@ parts:
     chapters:
     - file: guides/digital-twin
     - file: guides/agents
+
+  - caption: Air Traffic Control  
+    chapters:
+    - file: atc/intro
+    - file: atc/commands
+  
+
+  - caption: Command reference
+    chapters:
+    - file: reference/bluebird-server
+    - file: reference/aviary
+
+  - caption: Developer documentation
+    chapters:
+    - file: dev/bluebird-server
+    - file: dev/aviary
+
+  - caption: Community
+    chapters:
+    - file: community/about
+    - file: community/meetups  
