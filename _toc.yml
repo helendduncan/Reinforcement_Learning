@@ -1,0 +1,17 @@
+# Table of contents
+# More info at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+
+parts:
+  - caption: Getting Started
+    chapters:
+    - file: intro/example1.md
+    - file: intro/example2.md
+
+  - caption: Chapter 1
+    chapters:
+    - file: chapter_01/example3.md
+    - file: chapter_01/example1.ipynb
+    - file: chapter_01/exmaple4.md
