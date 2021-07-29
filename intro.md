@@ -1,4 +1,4 @@
-# Project BlueBird documentation
+# The intro.md file is not in a subfolder. Instead it sits next to the _toc and _config
 
 Eu laborum reprehenderit incididunt consequat aute ullamco eu Lorem sint. Eu voluptate ea et voluptate. Non cupidatat sint proident dolor minim Lorem laboris in in. Adipisicing ea magna in Lorem aliqua laborum aliqua voluptate Lorem velit duis. Anim in officia enim magna duis. Mollit in ea occaecat ullamco dolore esse aliqua nisi officia ullamco laboris excepteur do.
 
