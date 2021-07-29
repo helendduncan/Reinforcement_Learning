@@ -1,11 +1,12 @@
 # Book settings
-# More info at https://jupyterbook.org/customize/config.html
+# Learn more at https://jupyterbook.org/customize/config.html
 
-title: Reinforcement Learning
-author: Helen Duncan
-logo: tortoise.jpg
+title: Project BlueBird
+author: The Alan Turing Institute, NATS
+logo: logo.png
 
-# Force re-execution of notebook on each build
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
 
@@ -17,13 +18,14 @@ latex:
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
   - references.bib
-  
-# Information on where the book exists on the web
+
+# Information about where the book exists on the web
 repository:
-  url: https://github.com/executablebooks/jupyter-book # Online location of book
-  path_to_book: docs # Optional - Path to the book relative to the repo root
-  branch: master     # Optional - Branch of the repo that should be used when creating links
+  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
+  path_to_book: docs  # Optional path to your book, relative to the repository root
+  branch: master  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_repository_button: true

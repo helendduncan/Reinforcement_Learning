@@ -1,17 +1,15 @@
 # Table of contents
-# More info at https://jupyterbook.org/customize/toc.html
+# Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
 root: intro
 
 parts:
-  - caption: Getting Started
+  - caption: Getting started
     chapters:
-    - file: intro/example1.md
-    - file: intro/example2.md
+    - file: intro/install
 
-  - caption: Chapter 1
+  - caption: Using BlueBird
     chapters:
-    - file: chapter_01/example3.md
-    - file: chapter_01/example1.ipynb
-    - file: chapter_01/exmaple4.md
+    - file: guides/digital-twin
+    - file: guides/agents
