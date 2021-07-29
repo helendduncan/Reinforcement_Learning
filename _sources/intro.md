@@ -1,6 +1,8 @@
-# The intro.md file is not in a subfolder. Instead it sits next to the _toc and _config
+# Reinforcement Learning: An overview:
 
-Eu laborum reprehenderit incididunt consequat aute ullamco eu Lorem sint. Eu voluptate ea et voluptate. Non cupidatat sint proident dolor minim Lorem laboris in in. Adipisicing ea magna in Lorem aliqua laborum aliqua voluptate Lorem velit duis. Anim in officia enim magna duis. Mollit in ea occaecat ullamco dolore esse aliqua nisi officia ullamco laboris excepteur do.
+To start off with a cut and paste from [Wikipedia](https://en.wikipedia.org/wiki/Reinforcement_learning). Reinforcement learning is an area of machine learning, where intelligent agents should take actions in an environment in order to maximise the notion of a cumulative reward. To put this in the context of the NATS project - the intelligent agents are the things we are trying to train/generate, the environment will be the digital twin we make of the UK airspace, and the cumulative reward will be the continued seperation of aircraft in the sky, while maintaing good fuel efficiency and time.
+
+Sutton and Barto discuss the idea of reinforcement learning as a machine learning method that is focused on goal-directed learning from interaction. The idea is to "maximise a numerical reward signal" but without explicitly being told what actions to take, instead the agent/algorithm must explore a range of potential actions to discover which actions yield the greatest reward. As we will see in the [multi-armed-bandit]() -REF NOT THERE YET- example later on, one must balance the exploration and the exploitation phaase. Another feature that reinforcement learning must deal with is the idea that there may be multi-step ways to maximise the numerical reward, that is to say that a 'low-scoring' action may need to be taken in order for a 'high-scoring' step to occur. Sutton and Barto contend that the trial-and-error search and the delayed-reward characteristics distinguish reinforcement learning from other machine learning methods (perhaps such as supervised and unsupervised learning). 
 
 :::{note}
 The codebase is under heavy development.

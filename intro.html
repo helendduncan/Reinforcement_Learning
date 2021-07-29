@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The intro.md file is not in a subfolder. Instead it sits next to the _toc and _config &#8212; Reinforcement Learning</title>
+    <title>Reinforcement Learning: An overview: &#8212; Reinforcement Learning</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -84,7 +84,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1 current">
   <a class="reference internal" href="#">
-   The intro.md file is not in a subfolder. Instead it sits next to the _toc and _config
+   Reinforcement Learning: An overview:
   </a>
  </li>
 </ul>
@@ -231,9 +231,10 @@
         
               <div>
                 
-  <div class="section" id="the-intro-md-file-is-not-in-a-subfolder-instead-it-sits-next-to-the-toc-and-config">
-<h1>The <a class="reference external" href="http://intro.md">intro.md</a> file is not in a subfolder. Instead it sits next to the _toc and _config<a class="headerlink" href="#the-intro-md-file-is-not-in-a-subfolder-instead-it-sits-next-to-the-toc-and-config" title="Permalink to this headline">¶</a></h1>
-<p>Eu laborum reprehenderit incididunt consequat aute ullamco eu Lorem sint. Eu voluptate ea et voluptate. Non cupidatat sint proident dolor minim Lorem laboris in in. Adipisicing ea magna in Lorem aliqua laborum aliqua voluptate Lorem velit duis. Anim in officia enim magna duis. Mollit in ea occaecat ullamco dolore esse aliqua nisi officia ullamco laboris excepteur do.</p>
+  <div class="section" id="reinforcement-learning-an-overview">
+<h1>Reinforcement Learning: An overview:<a class="headerlink" href="#reinforcement-learning-an-overview" title="Permalink to this headline">¶</a></h1>
+<p>To start off with a cut and paste from <a class="reference external" href="https://en.wikipedia.org/wiki/Reinforcement_learning">Wikipedia</a>. Reinforcement learning is an area of machine learning, where intelligent agents should take actions in an environment in order to maximise the notion of a cumulative reward. To put this in the context of the NATS project - the intelligent agents are the things we are trying to train/generate, the environment will be the digital twin we make of the UK airspace, and the cumulative reward will be the continued seperation of aircraft in the sky, while maintaing good fuel efficiency and time.</p>
+<p>Sutton and Barto discuss the idea of reinforcement learning as a machine learning method that is focused on goal-directed learning from interaction. The idea is to “maximise a numerical reward signal” but without explicitly being told what actions to take, instead the agent/algorithm must explore a range of potential actions to discover which actions yield the greatest reward. As we will see in the <span class="xref myst">multi-armed-bandit</span> -REF NOT THERE YET- example later on, one must balance the exploration and the exploitation phaase. Another feature that reinforcement learning must deal with is the idea that there may be multi-step ways to maximise the numerical reward, that is to say that a ‘low-scoring’ action may need to be taken in order for a ‘high-scoring’ step to occur. Sutton and Barto contend that the trial-and-error search and the delayed-reward characteristics distinguish reinforcement learning from other machine learning methods (perhaps such as supervised and unsupervised learning).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The codebase is under heavy development.</p>
