@@ -3,7 +3,7 @@
 
 title: Reinforcement Learning
 author: Helen Duncan
-logo: /images/tortoise.jpg
+logo: tortoise.jpg
 
 
 # Force re-execution of notebook on each build
