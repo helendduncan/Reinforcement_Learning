@@ -1,0 +1,21 @@
+# Book settings
+# More info at https://jupyterbook.org/customize/config.html
+
+title: Reinforcement Learning
+author: Helen Duncan
+logo: /images/tortoise.jpg
+
+
+# Force re-execution of notebook on each build
+execute:
+  execute_notebooks: force
+
+# Information on where the book exists on the web
+repository:
+  url: https://github.com/executablebooks/jupyter-book # Online location of book
+  path_to_book: docs # Optional - Path to the book relative to the repo root
+  branch: master     # Optional - Branch of the repo that should be used when creating links
+
+# Add GitHub buttons to your book
+html:
+  use_repository_button: true
