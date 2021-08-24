@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.1 Multi-armed bandits: 3 restaurants &#8212; Reinforcement Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/abstract.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Reinforcement Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Reinforcement Learning: An overview:
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/install.html">
+   What I understand about reinforcement learning
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Chapter 2
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="aviary.html">
+   Aviary developer’s guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Using BlueBird
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../guides/digital-twin.html">
+   Running an airspace simulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../guides/agents.html">
+   Building a simple agent with BlueBird
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chap02/restaurant_bandit.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/main?urlpath=tree/docs/chap02/restaurant_bandit.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1.1 Multi-armed bandits: 3 restaurants
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#purely-explorative">
+   1.2 Purely Explorative
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#purely-exploitative">
+   1.3 Purely Exploitative
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#epsilon-greedy">
+   1.4 Epsilon Greedy
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="multi-armed-bandits-3-restaurants">
+<h1>1.1 Multi-armed bandits: 3 restaurants<a class="headerlink" href="#multi-armed-bandits-3-restaurants" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1624</span><span class="o">/</span><span class="mf">1783882472.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">random</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;scipy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we have a setup discussed on <a class="reference external" href="https://www.youtube.com/watch?v=e3L4VocZnnQ">YouTube</a> about a visiting professor spending 300 days in a new town. The professor wants to optimise their dining enjoyment of three restaurants. R1, R2 and R3. Each resturant will give an ‘average’ satisfaction for a meal with some distribution. The goal is to maximise the professors enjoyment and minimise their regret.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">restaurants</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Graph the probability distributions of the three restaurants based on the video</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">m</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="c1">#Mean for each of the 3 restaurants</span>
+    <span class="n">s</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mf">2.5</span><span class="p">]</span> <span class="c1">#Standard deviation for each of the 3 restaurants</span>
+    
+    <span class="n">rest</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Restaurant 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Restaurant 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Restaurant 3&#39;</span><span class="p">]</span>
+    <span class="n">colour</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="s1">&#39;firebrick&#39;</span><span class="p">,</span><span class="s1">&#39;mediumpurple&#39;</span><span class="p">]</span>
+    <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">ncols</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span><span class="o">/</span><span class="n">nrows</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax2d</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span><span class="n">ncols</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">ax2d</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rest</span><span class="p">):</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">m</span><span class="p">[</span><span class="n">count</span><span class="p">]</span>
+        <span class="n">sigma</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="n">count</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="n">colour</span><span class="p">[</span><span class="n">count</span><span class="p">])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">rest</span><span class="p">[</span><span class="n">count</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">show_all_three</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Graph the probability distributions of the three restaurants together</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="c1">#Mean for each of the 3 restaurants</span>
+    <span class="n">s</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mf">2.5</span><span class="p">]</span> <span class="c1">#Standard deviation for each of the 3 restaurants</span>
+    
+    <span class="n">rest</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Restaurant 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Restaurant 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Restaurant 3&#39;</span><span class="p">]</span>
+    <span class="n">colour</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="s1">&#39;firebrick&#39;</span><span class="p">,</span><span class="s1">&#39;mediumpurple&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rest</span><span class="p">):</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="p">[</span><span class="n">count</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="p">[</span><span class="n">count</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">[</span><span class="n">count</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">count</span><span class="p">]),</span><span class="n">color</span><span class="o">=</span><span class="n">colour</span><span class="p">[</span><span class="n">count</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="n">rest</span><span class="p">[</span><span class="n">count</span><span class="p">])</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Satisfaction&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        
+<span class="k">def</span> <span class="nf">visit</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a value for the happiness after a visit based on the restaurant&#39;s probability distributions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">m</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="c1">#Mean for each of the 3 restaurants</span>
+    <span class="n">s</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mf">2.5</span><span class="p">]</span> <span class="c1">#Standard deviation for each of the 3 restaurants</span>
+    
+    <span class="c1"># Generate numbers consistent with the distributions provided</span>
+    <span class="c1">#nsample=1000 #1000 points made up this distribution</span>
+    <span class="c1">#r1=np.random.normal(m[0],s[0],nsample)</span>
+    <span class="c1">#r2=np.random.normal(m[1],s[1],nsample)</span>
+    <span class="c1">#r3=np.random.normal(m[2],s[2],nsample)</span>
+    
+    <span class="n">op</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">r</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we have the distributions of satisfactions for each restaurant. Restaurant 1 has an average satisfaction of 10, with a standard deviation of 5. Restaurant 2 has an average satisfaction of 8, with a standard deviation of 4. Restaurant 3 has an average satisfaction of 5, with a standard deviation of 2.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_all_three</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/restaurant_bandit_5_0.png" src="../_images/restaurant_bandit_5_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="purely-explorative">
+<h1>1.2 Purely Explorative<a class="headerlink" href="#purely-explorative" title="Permalink to this headline">¶</a></h1>
+<p>In this example the professor will split their time between the three restaurants. So if they are visiting for 300 days, they will visit each of the three restaurants, 100 times each.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Set the initial satisfaction to be 0</span>
+<span class="n">satisfaction</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">nrest</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">ndaystot</span><span class="o">=</span><span class="mi">300</span>
+<span class="n">nvisits</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">ndaystot</span><span class="o">/</span><span class="n">nrest</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#Each of the 3 restaurants</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvisits</span><span class="p">):</span> <span class="c1">#number of visits to each restaurant</span>
+        <span class="n">satisfaction</span><span class="o">=</span><span class="n">satisfaction</span><span class="o">+</span><span class="n">visit</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The satisfaction using a purely explorative method is </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">satisfaction</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The satisfaction using a purely explorative method is 2262
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="purely-exploitative">
+<h1>1.3 Purely Exploitative<a class="headerlink" href="#purely-exploitative" title="Permalink to this headline">¶</a></h1>
+<p>In this example the professor visits each of the restaurants only once and based on that one visit decides to exclusively frequent the one which gave them the highest satisfaction score on that first visit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">satisfaction</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">iscore</span><span class="o">=</span><span class="p">[]</span> <span class="c1">#Initial score for the restaurant</span>
+<span class="n">rest</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Restaurant 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Restaurant 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Restaurant 3&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">iscore</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">visit</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+    
+<span class="n">bestrest</span><span class="o">=</span><span class="n">iscore</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">iscore</span><span class="p">))</span>
+<span class="n">satisfaction</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">iscore</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Based on a single visit to each; the professor will exclusively dine at &#39;</span>
+      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">rest</span><span class="p">[</span><span class="n">bestrest</span><span class="p">]</span><span class="si">}</span><span class="s1"> which &#39;</span>
+      <span class="sa">f</span><span class="s1">&#39;gave a satisfaction value of </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">satisfaction</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+
+<span class="c1"># The professor will now visit the resaurant that made the favourable first impression for the </span>
+<span class="c1"># rest of their visit</span>
+<span class="n">nvisits</span><span class="o">=</span><span class="n">ndaystot</span><span class="o">-</span><span class="n">nrest</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvisits</span><span class="p">):</span>
+    <span class="n">satisfaction</span><span class="o">=</span><span class="n">satisfaction</span><span class="o">+</span><span class="n">visit</span><span class="p">(</span><span class="n">bestrest</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The overall satisfaction using a purely exploitative method is </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">satisfaction</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Based on a single visit to each; the professor will exclusively dine at Restaurant 1 which gave a satisfaction value of 11.84
+The overall satisfaction using a purely exploitative method is 1515
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="epsilon-greedy">
+<h1>1.4 Epsilon Greedy<a class="headerlink" href="#epsilon-greedy" title="Permalink to this headline">¶</a></h1>
+<p>In the epsilon greedy example, we try to balance the desire to explore (to get to know the distributions of the three restaurants sufficiently well) with the desire to exploit (to go to the restaurant that will give us the greatest satisfaction).
+The process here, is to pick a value of epsilon (say 10%) and for that percentage of the time of the professor’s visit, they will pick a restaurant at random. For the other 90% of the time in this case, they will visit the restaurant that they have calculated will give them the greatest satisfaction. Now this calculation may change after more visits to the three restaurants give a more realistic idea of their satisfaction.
+As with the exploitative method, we do need to start with one visit to each restaurant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">first_visits</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A function to visit the three restaurants once each and return the number of the</span>
+<span class="sd">    restaurant with the highest satisfaction after one visit</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">iscore</span><span class="o">=</span><span class="p">[]</span> <span class="c1">#Initial score for the restaurant</span>
+    <span class="n">summary</span> <span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="c1">#Summary of the results for the 3 restaurants</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">vis</span><span class="o">=</span><span class="n">visit</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">iscore</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vis</span><span class="p">)</span>
+        <span class="n">summary</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">vis</span>
+        
+    <span class="n">bestrest</span><span class="o">=</span><span class="n">iscore</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">iscore</span><span class="p">))</span>
+    <span class="n">r1</span><span class="o">=</span><span class="p">[];</span> <span class="n">r2</span><span class="o">=</span><span class="p">[];</span> <span class="n">r3</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">r1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">summary</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> 
+    <span class="n">r2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">summary</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> 
+    <span class="n">r3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">summary</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">bestrest</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">r3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set a value for epsilon</span>
+<span class="n">epsilon</span><span class="o">=</span><span class="mi">10</span>
+
+<span class="n">best</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">r3</span> <span class="o">=</span> <span class="n">first_visits</span><span class="p">()</span>
+<span class="n">satisfaction</span><span class="o">=</span><span class="n">r1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">r2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">r3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Based on one visit, the best restaurant is Restaurant #</span><span class="si">{</span><span class="n">best</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The scores are: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">r1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">r2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">r3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The total satisfaction after the inital 3 visits is </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">satisfaction</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ndaystot</span><span class="o">=</span><span class="mi">300</span>
+<span class="n">nvisits</span><span class="o">=</span><span class="n">ndaystot</span><span class="o">-</span><span class="mi">3</span>
+<span class="n">results</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span>
+<span class="c1"># Now the professor has 297 days to either explore or exploit. There is a epsilon percent</span>
+<span class="c1"># chance that on any given day the professor will visit a random restaurant and not</span>
+<span class="c1"># necessarily the best restaurant based on their current information</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvisits</span><span class="p">):</span>
+    <span class="n">ep_tst</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ep_tst</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="o">/</span><span class="mf">100.</span><span class="p">):</span> <span class="c1"># If a random number between 0 and 1 is below 0.1 then</span>
+        <span class="c1"># Pick a random restaurant (between 0 and 2) and add the score to the list</span>
+        <span class="n">rest</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">val</span><span class="o">=</span><span class="n">visit</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rest</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">r1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rest</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">r2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rest</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">r3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="c1"># Work out the averages of each list and pick the restaurant with the highest</span>
+        <span class="c1"># average rating</span>
+        <span class="n">averages</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r1</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r2</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r3</span><span class="p">)]</span>
+        <span class="n">best</span><span class="o">=</span><span class="n">averages</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">averages</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">val</span><span class="o">=</span><span class="n">visit</span><span class="p">(</span><span class="n">best</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">best</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">r1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">best</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">r2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">best</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">r3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">averages</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r1</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r2</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r3</span><span class="p">)]</span>
+        <span class="n">best</span><span class="o">=</span><span class="n">averages</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">averages</span><span class="p">))</span> 
+    <span class="n">satisfaction</span><span class="o">=</span><span class="n">satisfaction</span><span class="o">+</span><span class="n">val</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At the end of their visit, the professor thinks Restaurant #</span><span class="si">{</span><span class="n">best</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> is the best&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The professor visited restaurant #1 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r1</span><span class="p">)</span><span class="si">}</span><span class="s2"> times, Restaurant #2 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r2</span><span class="p">)</span><span class="si">}</span><span class="s2"> times and Restaurant #3 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r3</span><span class="p">)</span><span class="si">}</span><span class="s2"> times&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Their satisfaction was </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">satisfaction</span><span class="p">)</span><span class="si">}</span><span class="s2"> using the epsilon-greedy method with epsilon = </span><span class="si">{</span><span class="n">epsilon</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Based on one visit, the best restaurant is Restaurant #1
+The scores are: 18.09, 9.68, 3.87
+The total satisfaction after the inital 3 visits is 32
+At the end of their visit, the professor thinks Restaurant #2 is the best
+The professor visited restaurant #1 18 times, Restaurant #2 273 times and Restaurant #3 9 times
+Their satisfaction was 2779 using the epsilon-greedy method with epsilon = 10%
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chap02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Helen Duncan<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
