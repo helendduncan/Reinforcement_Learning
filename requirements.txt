@@ -2,3 +2,4 @@ jupyter-sphinx
 jupyter-book
 matplotlib
 numpy
+scipy
