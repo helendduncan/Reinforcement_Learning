@@ -9,7 +9,7 @@ parts:
     chapters:
     - file: intro/install
   
-  -caption: Chapter 2
+  - caption: Chapter 2
     chapters:
     - file: chap02/aviary
 
