@@ -11,7 +11,7 @@ parts:
   
   -caption: Chapter 2
     chapters:
-    - file: chap02/restaurant_bandit
+    - file: chap02/aviary
 
   - caption: Using BlueBird
     chapters:
