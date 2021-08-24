@@ -274,19 +274,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1607</span><span class="o">/</span><span class="mf">1783882472.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">random</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;scipy&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Here we have a setup discussed on <a class="reference external" href="https://www.youtube.com/watch?v=e3L4VocZnnQ">YouTube</a> about a visiting professor spending 300 days in a new town. The professor wants to optimise their dining enjoyment of three restaurants. R1, R2 and R3. Each resturant will give an ‘average’ satisfaction for a meal with some distribution. The goal is to maximise the professors enjoyment and minimise their regret.</p>
 <div class="cell docutils container">
@@ -384,7 +371,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The satisfaction using a purely explorative method is 2369
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The satisfaction using a purely explorative method is 2340
 </pre></div>
 </div>
 </div>
@@ -420,8 +407,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Based on a single visit to each; the professor will exclusively dine at Restaurant 1 which gave a satisfaction value of 13.76
-The overall satisfaction using a purely exploitative method is 1544
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Based on a single visit to each; the professor will exclusively dine at Restaurant 1 which gave a satisfaction value of 9.24
+The overall satisfaction using a purely exploitative method is 1506
 </pre></div>
 </div>
 </div>
@@ -509,11 +496,11 @@ As with the exploitative method, we do need to start with one visit to each rest
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Based on one visit, the best restaurant is Restaurant #1
-The scores are: 10.06, 4.65, 2.38
-The total satisfaction after the inital 3 visits is 17
+The scores are: 16.37, 9.15, 4.21
+The total satisfaction after the inital 3 visits is 30
 At the end of their visit, the professor thinks Restaurant #2 is the best
-The professor visited restaurant #1 15 times, Restaurant #2 272 times and Restaurant #3 13 times
-Their satisfaction was 2847 using the epsilon-greedy method with epsilon = 10%
+The professor visited restaurant #1 18 times, Restaurant #2 266 times and Restaurant #3 16 times
+Their satisfaction was 2848 using the epsilon-greedy method with epsilon = 10%
 </pre></div>
 </div>
 </div>
