@@ -8,6 +8,10 @@ parts:
   - caption: Getting started
     chapters:
     - file: intro/install
+  
+  -caption: Chapter 2
+    chapters:
+    - file: chap02/restaurant_bandit.ipynb
 
   - caption: Using BlueBird
     chapters:
