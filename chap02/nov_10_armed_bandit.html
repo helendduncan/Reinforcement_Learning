@@ -1,0 +1,885 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The 10 armed bandit problem &#8212; Reinforcement Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/abstract.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Reinforcement Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Reinforcement Learning: An overview:
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/install.html">
+   What I understand about reinforcement learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 2
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="restaurant_too.html">
+   1.1 Multi-armed bandits: 3 restaurants
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch2_questions.html">
+   Chapter 2 selected questions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 3
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chap03/ch3_comments.html">
+   Markov Decision Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chap03/ch3_questions.html">
+   Chapter 3 selected questions
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chap02/nov_10_armed_bandit.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/main?urlpath=tree/docs/chap02/nov_10_armed_bandit.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   The 10 armed bandit problem
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#start-again-this-time-working-as-outlined-on-page-68-of-lab-book-2">
+   Start again: This time working as outlined on page 68 of lab book #2
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>The 10 armed bandit problem</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   The 10 armed bandit problem
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#start-again-this-time-working-as-outlined-on-page-68-of-lab-book-2">
+   Start again: This time working as outlined on page 68 of lab book #2
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="the-10-armed-bandit-problem">
+<h1>The 10 armed bandit problem<a class="headerlink" href="#the-10-armed-bandit-problem" title="Permalink to this headline">¶</a></h1>
+<p>Initially we pick k (10) values from a normal distribution with mu = 0 and sigma = 1</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">secrets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setup_bandit</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">action_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">action_values</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">greedy_actual_reward</span><span class="p">(</span><span class="n">action_values</span><span class="p">):</span>
+    <span class="n">opt_arm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">action_values</span><span class="p">)</span>
+    <span class="n">reward</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">action_values</span><span class="p">[</span><span class="n">opt_arm</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sample_average</span><span class="p">(</span><span class="n">sum_rewards</span><span class="p">,</span> <span class="n">npulls</span><span class="p">):</span>
+    <span class="n">updated_average</span> <span class="o">=</span> <span class="n">sum_rewards</span><span class="o">/</span><span class="n">npulls</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">updated_average</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">run_experiment</span><span class="p">(</span><span class="n">action_values</span><span class="p">,</span> <span class="n">npulls</span><span class="p">):</span>
+    <span class="n">results_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">npulls</span><span class="p">)</span>
+    <span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">sum_rewards</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npulls</span><span class="p">):</span>
+        <span class="n">Rt</span> <span class="o">=</span> <span class="n">greedy_actual_reward</span><span class="p">(</span><span class="n">action_values</span><span class="p">)</span>
+        <span class="n">sum_rewards</span> <span class="o">+=</span> <span class="n">Rt</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">average</span> <span class="o">=</span> <span class="n">sample_average</span><span class="p">(</span><span class="n">sum_rewards</span><span class="p">,</span> <span class="n">counter</span><span class="p">)</span>
+        <span class="n">results_array</span><span class="p">[</span><span class="n">_</span><span class="p">]</span> <span class="o">=</span> <span class="n">average</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">average</span><span class="p">,</span> <span class="n">results_array</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">run_lots_of_experiments</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">npulls</span><span class="p">,</span> <span class="n">nexperiments</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nexperiments</span><span class="p">)</span>
+    <span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">sum_rewards</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nexperiments</span><span class="p">):</span>
+        <span class="n">action_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="c1"># Generate a new set of 10-armed bandits for each experiment</span>
+        <span class="n">experiment_result</span><span class="p">,</span> <span class="n">average_array</span> <span class="o">=</span> <span class="n">run_experiment</span><span class="p">(</span><span class="n">action_values</span><span class="p">,</span> <span class="n">npulls</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">_</span><span class="p">]</span> <span class="o">=</span> <span class="n">experiment_result</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">av</span><span class="o">=</span><span class="n">setup_bandit</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Action Values = &quot;</span><span class="p">,</span><span class="n">av</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best arm is #&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">av</span><span class="p">),</span> <span class="s2">&quot;which gives a value of &quot;</span> <span class="p">,</span> <span class="n">av</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">av</span><span class="p">)])</span>
+<span class="n">npulls</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">average_reward</span><span class="p">,</span> <span class="n">average_array</span> <span class="o">=</span> <span class="n">run_experiment</span><span class="p">(</span><span class="n">av</span><span class="p">,</span> <span class="n">npulls</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For one run,the average reward is&quot;</span><span class="p">,</span> <span class="n">average_reward</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Action Values =  [-0.55501917 -1.21283568  0.32823023  0.17705487  0.57213348 -0.32649234
+ -0.7263376   0.137195    0.17728795 -0.01585451]
+The best arm is # 4 which gives a value of  0.5721334760058148
+For one run,the average reward is 0.5494592644712388
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">average_array</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">average_array</span><span class="p">))</span>
+<span class="c1"># Plot the results of one run of a thousand pulls...</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">average_array</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">average_array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Results from one run of epsilon greedy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X axis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y axis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.81637895 -0.28229647 -0.3296193   0.04676018  0.12576107  0.11096001
+  0.31972927  0.34527819  0.31861449  0.20621913  0.12417779  0.14200212
+  0.18862667  0.24097567  0.37559553  0.44249517  0.43714164  0.55419997
+  0.54110906  0.54479681  0.53811239  0.56857662  0.60228852  0.60443428
+  0.57346838  0.56167314  0.56174527  0.56307649  0.54085007  0.50923219
+  0.5485281   0.59236759  0.61992486  0.62969239  0.60475265  0.62883543
+  0.62939378  0.61970425  0.60116836  0.5472216   0.57396629  0.5872038
+  0.61742089  0.62482459  0.62692052  0.61149151  0.60253351  0.58635444
+  0.55607057  0.5571386   0.55340989  0.54930036  0.56697695  0.57127633
+  0.56687861  0.55085503  0.55127826  0.56275983  0.57659909  0.58772132
+  0.57547322  0.57749346  0.54221614  0.54853105  0.53643456  0.5202342
+  0.51855163  0.51058635  0.50936566  0.49530559  0.47150963  0.47335531
+  0.47150138  0.47829126  0.46736307  0.44455103  0.45568325  0.46554663
+  0.47177944  0.47808319  0.49443674  0.49604221  0.49079426  0.49032205
+  0.48435525  0.49254795  0.47128632  0.47625007  0.48850417  0.51029532
+  0.48861152  0.48932626  0.50083387  0.49524877  0.49328726  0.49724745
+  0.49466271  0.49364798  0.50040794  0.48912866  0.48830748  0.47546094
+  0.46861857  0.48110203  0.48966241  0.48321683  0.49088801  0.4943583
+  0.50800644  0.49579708  0.50229563  0.48741852  0.50302031  0.51963189
+  0.51312128  0.52016173  0.52744065  0.535923    0.53912836  0.52662763
+  0.53430584  0.5229137   0.53688282  0.54746099  0.540266    0.53793294
+  0.54736865  0.56054981  0.56552596  0.56781216  0.56597452  0.55020189
+  0.53563412  0.5331605   0.54301387  0.53834076  0.54369443  0.54610356
+  0.55136038  0.54954168  0.55130738  0.55469867  0.54793717  0.55582871
+  0.55544818  0.54635971  0.53843525  0.52831251  0.53965274  0.53616336
+  0.53237607  0.5418467   0.53944873  0.54347107  0.5469013   0.54818266
+  0.54038689  0.54141637  0.539769    0.54917399  0.53776566  0.54882428
+  0.54713551  0.54857061  0.54149285  0.53279893  0.52438866  0.52765762
+  0.52802993  0.52026881  0.51901405  0.5208029   0.51744691  0.51302233
+  0.51076648  0.50841211  0.51477235  0.51558873  0.51653218  0.50887788
+  0.50869304  0.5145288   0.5080991   0.50975074  0.50711701  0.50982336
+  0.51377626  0.51360056  0.51792706  0.51557856  0.51195919  0.512261
+  0.50683472  0.51794834  0.52007798  0.52124247  0.5212542   0.52251598
+  0.52046718  0.51430145  0.513176    0.50350379  0.50508111  0.51738171
+  0.51917914  0.51733953  0.51034158  0.51136434  0.51671175  0.51415685
+  0.51268142  0.51397605  0.52101766  0.5185421   0.52338527  0.51697751
+  0.51229679  0.51086674  0.5145266   0.51802956  0.52070294  0.52214426
+  0.51651966  0.51472116  0.51917455  0.52327029  0.52157999  0.52278133
+  0.51731325  0.52184468  0.52431807  0.52390741  0.52328102  0.5194805
+  0.51646861  0.51768048  0.51597556  0.51330252  0.51448448  0.51754812
+  0.51917323  0.51904913  0.51859544  0.51990727  0.52311092  0.52074279
+  0.52363971  0.52190374  0.51899466  0.51354955  0.51247687  0.50631195
+  0.50881917  0.51011341  0.50713325  0.50971467  0.51083737  0.5086622
+  0.50959862  0.51108098  0.51447595  0.52092934  0.52420636  0.52175512
+  0.52066675  0.51411661  0.51822553  0.51621514  0.51078554  0.51771631
+  0.51891242  0.52209539  0.51541051  0.50961341  0.50948388  0.51025719
+  0.51757754  0.51690012  0.515077    0.51045246  0.50937521  0.5106813
+  0.51473281  0.52159269  0.51729041  0.52387455  0.52093472  0.52434103
+  0.51849972  0.51347633  0.51652518  0.51383487  0.5129966   0.51495258
+  0.5163002   0.52027725  0.52254036  0.523661    0.52203126  0.519079
+  0.51650204  0.51454053  0.51234587  0.5109687   0.50888981  0.51048436
+  0.51810424  0.52397486  0.51889055  0.52027006  0.51892118  0.5201679
+  0.52620426  0.53057151  0.53275081  0.53184293  0.53286065  0.53283104
+  0.5328935   0.53772511  0.53517983  0.53274891  0.53004085  0.53207741
+  0.53166065  0.52894006  0.52529936  0.52709958  0.52864281  0.52953968
+  0.53000514  0.52889899  0.52482698  0.52001144  0.52537108  0.52638944
+  0.53145658  0.53428073  0.53951505  0.54172678  0.54038461  0.53804998
+  0.53586523  0.53545744  0.54067965  0.53846515  0.53105383  0.53398517
+  0.53238409  0.53486391  0.53652006  0.53659025  0.53643828  0.53894844
+  0.53907027  0.53784123  0.53946234  0.53655124  0.53531122  0.52989011
+  0.5254787   0.5240425   0.52817985  0.53221645  0.53265594  0.53252847
+  0.53021565  0.52957283  0.52906514  0.52696025  0.52244511  0.51971187
+  0.51461261  0.51225408  0.51196857  0.51063004  0.510344    0.51124813
+  0.51092982  0.51622139  0.51271707  0.51204743  0.51283569  0.51963695
+  0.5175815   0.52174423  0.51654322  0.52045715  0.52055489  0.52374103
+  0.52271273  0.52128286  0.52121853  0.51397963  0.51576051  0.51386912
+  0.51441345  0.51476145  0.51108598  0.51324082  0.51012182  0.51091222
+  0.5168467   0.51721932  0.52413781  0.51872883  0.51647289  0.52015632
+  0.51794524  0.51602959  0.51344294  0.51353714  0.51181418  0.51276735
+  0.51069344  0.51246261  0.51534164  0.52053149  0.52133878  0.5182023
+  0.52182611  0.51777037  0.51572368  0.51548977  0.51205266  0.51299457
+  0.51901607  0.52120632  0.52163431  0.52155427  0.52161462  0.52113721
+  0.52304338  0.51836958  0.51926169  0.51795727  0.51894317  0.5207344
+  0.5203728   0.52163149  0.51780333  0.52244844  0.52285737  0.52126667
+  0.52025388  0.52623761  0.5208756   0.52229774  0.52306115  0.52014435
+  0.52037453  0.52195357  0.52195309  0.51687699  0.51655244  0.51893091
+  0.51825101  0.51887719  0.51835176  0.5181222   0.51815935  0.52279542
+  0.52182778  0.52724722  0.52743683  0.5234415   0.52442085  0.52564549
+  0.5243651   0.52598914  0.52792876  0.52868892  0.53117765  0.53454774
+  0.53156281  0.53239496  0.53189166  0.5278446   0.52972239  0.53059851
+  0.52875502  0.52568042  0.52555488  0.52583199  0.52506822  0.52554863
+  0.52734374  0.52636355  0.52971389  0.53148099  0.53349464  0.53210045
+  0.53088561  0.53271544  0.53272803  0.53546581  0.53655247  0.53723349
+  0.53617426  0.54010112  0.53794873  0.53568168  0.53375222  0.53223304
+  0.53115543  0.52953     0.52847238  0.5226643   0.52705341  0.52602567
+  0.52577606  0.523328    0.51884597  0.51750015  0.51846165  0.51986897
+  0.52135356  0.52319334  0.52353443  0.52268267  0.52322916  0.52630908
+  0.52230298  0.52133766  0.52070948  0.51942396  0.52113315  0.52065398
+  0.51912063  0.51874949  0.51972224  0.52137723  0.52356742  0.52460452
+  0.52408532  0.5239647   0.52511741  0.5282773   0.52571539  0.5266895
+  0.52702554  0.52812171  0.52960245  0.52838833  0.52481783  0.52843356
+  0.53077075  0.53406341  0.53431155  0.53766604  0.53789267  0.53722384
+  0.53709408  0.5343476   0.53688777  0.53759123  0.53752574  0.53710181
+  0.54042348  0.53838608  0.53882083  0.53964565  0.54076437  0.54091926
+  0.54002313  0.53933839  0.54222699  0.54711673  0.54933714  0.54843576
+  0.54785729  0.54977153  0.55088915  0.54913863  0.54797596  0.54567108
+  0.54514188  0.54696572  0.5466038   0.54547051  0.54651178  0.54563867
+  0.54624506  0.5438321   0.54513909  0.54574061  0.54655872  0.54712685
+  0.54479045  0.54512774  0.54467802  0.54567388  0.54533207  0.54307377
+  0.54439091  0.54622506  0.55040511  0.55082603  0.55168276  0.54926868
+  0.55159325  0.55078922  0.55161785  0.55127238  0.55136717  0.55138939
+  0.55146858  0.55157174  0.54961383  0.54816801  0.54905299  0.54924914
+  0.5463091   0.54688384  0.54747731  0.54606076  0.5456156   0.54533541
+  0.5481843   0.5494417   0.55239281  0.55200179  0.55030304  0.54971129
+  0.54908743  0.54936088  0.55003051  0.55194997  0.55178232  0.55159458
+  0.55467162  0.55436844  0.55485315  0.55441859  0.5567122   0.55774348
+  0.56042216  0.56335404  0.5658223   0.56548837  0.5626698   0.56025095
+  0.55799418  0.55807096  0.56032755  0.55962111  0.55850713  0.55828766
+  0.55894771  0.55786367  0.5594451   0.56071733  0.56062486  0.55995347
+  0.56337875  0.5629883   0.56294707  0.56245025  0.5615743   0.56263584
+  0.56297939  0.56297687  0.5617505   0.56146481  0.56202172  0.56167391
+  0.55931261  0.5605027   0.5599245   0.56034949  0.56162553  0.56238544
+  0.5632228   0.56160748  0.56124124  0.56273136  0.56461494  0.56570048
+  0.5654846   0.56564456  0.56612356  0.56613383  0.56493012  0.56396987
+  0.56457445  0.56581447  0.56615317  0.56596572  0.56718818  0.56888794
+  0.56661812  0.56735977  0.56750411  0.56696053  0.56661407  0.57034413
+  0.57079742  0.56989623  0.57040337  0.57089219  0.56859434  0.56857676
+  0.56942741  0.57099934  0.57014368  0.56820225  0.56762164  0.56627399
+  0.56416606  0.5664451   0.56543401  0.56295712  0.56150564  0.56319517
+  0.56298967  0.56296636  0.56259839  0.55963868  0.55949003  0.55764706
+  0.55637346  0.55946057  0.56011836  0.55849033  0.5605869   0.55967601
+  0.55956768  0.55842349  0.56098222  0.56228823  0.56279056  0.56228839
+  0.56062322  0.56353304  0.56445304  0.56476128  0.56119117  0.56275713
+  0.56279938  0.56348994  0.56447183  0.56324186  0.56442516  0.5652752
+  0.5642959   0.56444042  0.56540855  0.56715671  0.56660026  0.56746345
+  0.5684813   0.56672646  0.56747992  0.5700013   0.56977668  0.57166383
+  0.56857181  0.57055786  0.57056961  0.57132099  0.56962154  0.56830787
+  0.56772132  0.56789306  0.56820006  0.5675102   0.56740652  0.56649505
+  0.56340696  0.56333218  0.56191369  0.56317429  0.56302132  0.56341391
+  0.56158566  0.55996326  0.55924481  0.55926847  0.55885584  0.55786069
+  0.55763587  0.55712125  0.55745101  0.55545166  0.55600254  0.55708926
+  0.55529889  0.5567595   0.55537496  0.55682823  0.55909473  0.55897441
+  0.55897448  0.55770752  0.55728599  0.55635921  0.55422098  0.55595004
+  0.55504659  0.55626209  0.55451818  0.55215757  0.55109787  0.55230264
+  0.55110081  0.55143487  0.54821227  0.54894584  0.54889906  0.5483494
+  0.54693415  0.54673976  0.54669392  0.54512039  0.54508312  0.54502251
+  0.54311288  0.54297618  0.54260917  0.54420878  0.54400276  0.54352125
+  0.54378334  0.54172528  0.54125091  0.54455422  0.54627426  0.54904512
+  0.54629541  0.54547106  0.54578154  0.54404953  0.54302772  0.54316253
+  0.54304978  0.54373696  0.54371713  0.54222885  0.5421011   0.54398171
+  0.54125692  0.54279473  0.54397801  0.54332284  0.5430401   0.54221613
+  0.54127991  0.54192205  0.54399025  0.54398226  0.54434622  0.54524475
+  0.54596325  0.54684697  0.54676763  0.54782915  0.548074    0.5509918
+  0.55084539  0.55126447  0.55156641  0.55087113  0.55078758  0.55081001
+  0.5542128   0.55576317  0.55513956  0.55554975  0.55795411  0.55730961
+  0.55596986  0.55495794  0.5542773   0.55279824  0.55326856  0.55225013
+  0.55251016  0.55232314  0.55453451  0.55318246  0.55357742  0.55174905
+  0.55146352  0.55359044  0.55361143  0.55344824  0.55296964  0.5548708
+  0.55538683  0.55451199  0.5545435   0.55377103  0.55468875  0.55369418
+  0.55199329  0.55071076  0.55034968  0.55223521  0.55323674  0.55221586
+  0.55314664  0.55332547  0.5547269   0.55511563  0.55514159  0.55628615
+  0.55708262  0.55606195  0.55482562  0.55562129  0.55436272  0.55345457
+  0.5527919   0.55075461  0.55089103  0.55140212  0.55308252  0.55274791
+  0.55237509  0.55195247  0.54943574  0.55042844  0.54816961  0.54892707
+  0.54795986  0.54840666  0.54768687  0.54693995  0.54366917  0.54398227
+  0.54363403  0.54325801  0.54409897  0.54327878  0.54312094  0.54292548
+  0.54280383  0.54303415  0.54352787  0.54445921  0.54520739  0.5442292
+  0.5463957   0.54624073  0.54490044  0.54608957  0.54598635  0.5463863
+  0.54645098  0.54907488  0.54889787  0.54703109  0.54586188  0.54290544
+  0.54093951  0.54182136  0.54410268  0.5449741   0.54541921  0.54396832
+  0.54347453  0.54421483  0.54539754  0.54612115  0.54492223  0.54358718
+  0.54375751  0.54333469  0.54331835  0.54236092  0.54247991  0.54163549
+  0.54204785  0.54283771  0.54147571  0.54083227  0.54160881  0.54191144
+  0.54059276  0.54139765  0.54241777  0.5428908   0.54402873  0.54295838
+  0.54425529  0.5433799   0.54508741  0.54425461  0.54444916  0.54504734
+  0.54539489  0.54603973  0.54677793  0.54629002  0.54721281  0.54808282
+  0.54742852  0.54747903  0.54934386  0.54945926] 1000
+[   1    2    3    4    5    6    7    8    9   10   11   12   13   14
+   15   16   17   18   19   20   21   22   23   24   25   26   27   28
+   29   30   31   32   33   34   35   36   37   38   39   40   41   42
+   43   44   45   46   47   48   49   50   51   52   53   54   55   56
+   57   58   59   60   61   62   63   64   65   66   67   68   69   70
+   71   72   73   74   75   76   77   78   79   80   81   82   83   84
+   85   86   87   88   89   90   91   92   93   94   95   96   97   98
+   99  100  101  102  103  104  105  106  107  108  109  110  111  112
+  113  114  115  116  117  118  119  120  121  122  123  124  125  126
+  127  128  129  130  131  132  133  134  135  136  137  138  139  140
+  141  142  143  144  145  146  147  148  149  150  151  152  153  154
+  155  156  157  158  159  160  161  162  163  164  165  166  167  168
+  169  170  171  172  173  174  175  176  177  178  179  180  181  182
+  183  184  185  186  187  188  189  190  191  192  193  194  195  196
+  197  198  199  200  201  202  203  204  205  206  207  208  209  210
+  211  212  213  214  215  216  217  218  219  220  221  222  223  224
+  225  226  227  228  229  230  231  232  233  234  235  236  237  238
+  239  240  241  242  243  244  245  246  247  248  249  250  251  252
+  253  254  255  256  257  258  259  260  261  262  263  264  265  266
+  267  268  269  270  271  272  273  274  275  276  277  278  279  280
+  281  282  283  284  285  286  287  288  289  290  291  292  293  294
+  295  296  297  298  299  300  301  302  303  304  305  306  307  308
+  309  310  311  312  313  314  315  316  317  318  319  320  321  322
+  323  324  325  326  327  328  329  330  331  332  333  334  335  336
+  337  338  339  340  341  342  343  344  345  346  347  348  349  350
+  351  352  353  354  355  356  357  358  359  360  361  362  363  364
+  365  366  367  368  369  370  371  372  373  374  375  376  377  378
+  379  380  381  382  383  384  385  386  387  388  389  390  391  392
+  393  394  395  396  397  398  399  400  401  402  403  404  405  406
+  407  408  409  410  411  412  413  414  415  416  417  418  419  420
+  421  422  423  424  425  426  427  428  429  430  431  432  433  434
+  435  436  437  438  439  440  441  442  443  444  445  446  447  448
+  449  450  451  452  453  454  455  456  457  458  459  460  461  462
+  463  464  465  466  467  468  469  470  471  472  473  474  475  476
+  477  478  479  480  481  482  483  484  485  486  487  488  489  490
+  491  492  493  494  495  496  497  498  499  500  501  502  503  504
+  505  506  507  508  509  510  511  512  513  514  515  516  517  518
+  519  520  521  522  523  524  525  526  527  528  529  530  531  532
+  533  534  535  536  537  538  539  540  541  542  543  544  545  546
+  547  548  549  550  551  552  553  554  555  556  557  558  559  560
+  561  562  563  564  565  566  567  568  569  570  571  572  573  574
+  575  576  577  578  579  580  581  582  583  584  585  586  587  588
+  589  590  591  592  593  594  595  596  597  598  599  600  601  602
+  603  604  605  606  607  608  609  610  611  612  613  614  615  616
+  617  618  619  620  621  622  623  624  625  626  627  628  629  630
+  631  632  633  634  635  636  637  638  639  640  641  642  643  644
+  645  646  647  648  649  650  651  652  653  654  655  656  657  658
+  659  660  661  662  663  664  665  666  667  668  669  670  671  672
+  673  674  675  676  677  678  679  680  681  682  683  684  685  686
+  687  688  689  690  691  692  693  694  695  696  697  698  699  700
+  701  702  703  704  705  706  707  708  709  710  711  712  713  714
+  715  716  717  718  719  720  721  722  723  724  725  726  727  728
+  729  730  731  732  733  734  735  736  737  738  739  740  741  742
+  743  744  745  746  747  748  749  750  751  752  753  754  755  756
+  757  758  759  760  761  762  763  764  765  766  767  768  769  770
+  771  772  773  774  775  776  777  778  779  780  781  782  783  784
+  785  786  787  788  789  790  791  792  793  794  795  796  797  798
+  799  800  801  802  803  804  805  806  807  808  809  810  811  812
+  813  814  815  816  817  818  819  820  821  822  823  824  825  826
+  827  828  829  830  831  832  833  834  835  836  837  838  839  840
+  841  842  843  844  845  846  847  848  849  850  851  852  853  854
+  855  856  857  858  859  860  861  862  863  864  865  866  867  868
+  869  870  871  872  873  874  875  876  877  878  879  880  881  882
+  883  884  885  886  887  888  889  890  891  892  893  894  895  896
+  897  898  899  900  901  902  903  904  905  906  907  908  909  910
+  911  912  913  914  915  916  917  918  919  920  921  922  923  924
+  925  926  927  928  929  930  931  932  933  934  935  936  937  938
+  939  940  941  942  943  944  945  946  947  948  949  950  951  952
+  953  954  955  956  957  958  959  960  961  962  963  964  965  966
+  967  968  969  970  971  972  973  974  975  976  977  978  979  980
+  981  982  983  984  985  986  987  988  989  990  991  992  993  994
+  995  996  997  998  999 1000] 1000 1000
+1000
+</pre></div>
+</div>
+<img alt="../_images/nov_10_armed_bandit_5_1.png" src="../_images/nov_10_armed_bandit_5_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nexperiments</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">multi_exp</span> <span class="o">=</span> <span class="n">run_lots_of_experiments</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">npulls</span><span class="p">,</span> <span class="n">nexperiments</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.59147056 2.52276562 2.71110359 ... 1.51205564 1.10531694 0.46105398]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">multi_exp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.59147056 2.52276562 2.71110359 ... 1.51205564 1.10531694 0.46105398]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multi_exp_sample_av</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nexperiments</span><span class="p">)</span>
+<span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">sum_rewards</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">multi_exp</span><span class="p">):</span>
+    <span class="n">sum_rewards</span> <span class="o">+=</span> <span class="n">value</span>
+    <span class="n">multi_exp_output</span> <span class="o">=</span> <span class="n">sample_average</span><span class="p">(</span><span class="n">sum_rewards</span><span class="p">,</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">multi_exp_sample_av</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">multi_exp_output</span>
+<span class="c1">#     print(count + 1, value, multi_exp_output, sum_rewards)</span>
+  
+<span class="nb">print</span><span class="p">(</span><span class="n">multi_exp_sample_av</span><span class="p">)</span>
+
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nexperiments</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">multi_exp_sample_av</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">y</span><span class="o">=</span><span class="n">multi_exp_sample_av</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Line graph&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X axis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y axis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">multi_exp</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.59147056 2.05711809 2.27511325 ... 1.53138641 1.53117327 1.53063821]
+[   1    2    3 ... 1998 1999 2000] 2000 2000
+</pre></div>
+</div>
+<img alt="../_images/nov_10_armed_bandit_8_1.png" src="../_images/nov_10_armed_bandit_8_1.png" />
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="start-again-this-time-working-as-outlined-on-page-68-of-lab-book-2">
+<h1>Start again: This time working as outlined on page 68 of lab book #2<a class="headerlink" href="#start-again-this-time-working-as-outlined-on-page-68-of-lab-book-2" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get initial distribution for first experiment</span>
+<span class="n">k</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">action_value_mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">action_value_mu</span><span class="p">)</span>
+<span class="n">n_array</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">action_value_mu</span><span class="p">))</span>
+<span class="n">estimate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">action_value_mu</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n_array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.05155866 -0.1637532  -1.54652389 -1.1673044  -1.51763956  1.64080345
+ -0.33214802 -0.70119751  0.97332405  0.5681582 ]
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_bandit</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate a k-armed bandit as outlines in the book&quot;&quot;&quot;</span>
+    <span class="n">action_value_mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">action_value_mu</span>
+    
+<span class="k">def</span> <span class="nf">pick_arm</span><span class="p">(</span><span class="n">action_value_mu</span><span class="p">,</span> <span class="n">estimate_array</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+    <span class="n">k</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">estimate_array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">estimate_array</span><span class="p">):</span> <span class="c1">#If the array is full of zeros then just pick an arm at random</span>
+        <span class="n">choice</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="c1">#         print(&quot;all zeros&quot;)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Greedy and non-greedy choices</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">-</span><span class="n">epsilon</span><span class="p">:</span> <span class="c1">#Explore</span>
+            <span class="n">choice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="c1">#             print(&quot;explore&quot;)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1">#Exploit</span>
+            <span class="n">maxval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">estimate_array</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">maxval</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">choice</span> <span class="o">=</span> <span class="n">exploit_pick_neg_or_zeroes</span><span class="p">(</span><span class="n">estimate_array</span><span class="p">)</span>
+                <span class="c1">#If all the non-zero values are &lt; 0 then pick a random zero value</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">choice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">estimate_array</span><span class="p">)</span>  <span class="c1">#If there is one non-zero value (&gt;0) then pick that.           </span>
+<span class="c1">#             print(&quot;exploit&quot;)</span>
+<span class="c1">#     print(&quot;pick arm&quot;, choice)</span>
+    <span class="n">mu</span><span class="o">=</span><span class="n">action_value_mu</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span>
+    <span class="n">Rt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">n_array</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">estimate_array</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span> <span class="o">=</span> <span class="n">update_estimate_array</span><span class="p">(</span><span class="n">Rt</span><span class="p">,</span> <span class="n">estimate_array</span><span class="p">[</span><span class="n">choice</span><span class="p">],</span> <span class="n">n_array</span><span class="p">[</span><span class="n">choice</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">estimate_array</span><span class="p">,</span> <span class="n">Rt</span><span class="p">)</span>
+ 
+<span class="k">def</span> <span class="nf">exploit_pick_neg_or_zeroes</span><span class="p">(</span><span class="n">estimate_array</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Take the estimate array, if all values are below 0 then pick the least negative one</span>
+<span class="sd">    if some values are zero, and others below, pick a random zero from the contenders&quot;&quot;&quot;</span>
+    <span class="n">contenders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">estimate_array</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">contenders</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">estimate_array</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">contenders</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">choice</span>
+    
+<span class="k">def</span> <span class="nf">update_estimate_array</span><span class="p">(</span><span class="n">Rt</span><span class="p">,</span> <span class="n">previous_value</span><span class="p">,</span> <span class="n">n_pulls</span><span class="p">):</span>
+    <span class="n">updated_values</span> <span class="o">=</span> <span class="n">previous_value</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">n_pulls</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Rt</span> <span class="o">-</span> <span class="n">previous_value</span><span class="p">))</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">updated_values</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">reset_estimate_and_n_array</span><span class="p">(</span><span class="n">action_value_mu</span><span class="p">):</span>
+    <span class="n">estimate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">action_value_mu</span><span class="p">))</span>
+    <span class="n">n_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">action_value_mu</span><span class="p">))</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">estimate_array</span><span class="p">,</span> <span class="n">n_array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_experiment</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">npulls</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate a k-armed bandit and pull the lever npull times&quot;&quot;&quot;</span>
+    <span class="n">action_value_mu</span> <span class="o">=</span> <span class="n">generate_bandit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1">#     print(action_value_mu)</span>
+    <span class="n">estimate_array</span><span class="p">,</span> <span class="n">n_array</span> <span class="o">=</span> <span class="n">reset_estimate_and_n_array</span><span class="p">(</span><span class="n">action_value_mu</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">npulls</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npulls</span><span class="p">):</span>
+        <span class="n">estimate_array</span><span class="p">,</span> <span class="n">reward</span> <span class="o">=</span> <span class="n">pick_arm</span><span class="p">(</span><span class="n">action_value_mu</span><span class="p">,</span> <span class="n">estimate_array</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)</span> <span class="c1">#epsilon=0 means greedy</span>
+<span class="c1">#         print(_, np.around(estimate_array,2), np.around(reward,4))</span>
+        <span class="n">scores</span><span class="p">[</span><span class="n">_</span><span class="p">]</span><span class="o">=</span><span class="n">reward</span>
+<span class="c1">#     print(scores)</span>
+<span class="c1">#     print(estimate_array)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">estimate_array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_multiple_exp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">npulls</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">nexp</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nexp</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">exp</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">old_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">npulls</span><span class="p">)</span>
+        <span class="n">new_scores</span><span class="p">,</span> <span class="n">estimate_array</span> <span class="o">=</span> <span class="n">run_experiment</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">npulls</span><span class="o">=</span><span class="n">npulls</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
+        <span class="n">average_scores</span> <span class="o">=</span> <span class="n">scores_averaging</span><span class="p">(</span><span class="n">old_scores</span><span class="p">,</span><span class="n">new_scores</span><span class="p">,</span><span class="n">nexp</span><span class="p">)</span>
+        <span class="n">old_scores</span> <span class="o">=</span> <span class="n">new_scores</span>
+    <span class="k">return</span> <span class="n">average_scores</span>
+
+<span class="k">def</span> <span class="nf">scores_averaging</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">nexp</span><span class="p">):</span>
+    <span class="n">new_av</span> <span class="o">=</span> <span class="n">old</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">nexp</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">new</span><span class="o">-</span><span class="n">old</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">new_av</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Greedy run 1000 pulls, 2000 experiments</span>
+<span class="n">scores_array_average</span> <span class="o">=</span> <span class="n">run_multiple_exp</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">npulls</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nexp</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">scores_array_average</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">scores_array_average</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Line graph&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X axis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y axis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/nov_10_armed_bandit_15_0.png" src="../_images/nov_10_armed_bandit_15_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Explore run 1000 pulls, 2000 experiments</span>
+<span class="n">scores_array_average</span> <span class="o">=</span> <span class="n">run_multiple_exp</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">npulls</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">nexp</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">scores_array_average</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">scores_array_average</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Line graph&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X axis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y axis&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/nov_10_armed_bandit_16_0.png" src="../_images/nov_10_armed_bandit_16_0.png" />
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chap02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Helen Duncan<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

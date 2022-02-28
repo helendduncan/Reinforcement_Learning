@@ -1,0 +1,865 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.1 Multi-armed bandits: 3 restaurants &#8212; Reinforcement Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chapter 2 selected questions" href="ch2_questions.html" />
+    <link rel="prev" title="What I understand about reinforcement learning" href="../intro/install.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/abstract.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Reinforcement Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Reinforcement Learning: An overview:
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/install.html">
+   What I understand about reinforcement learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 2
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1.1 Multi-armed bandits: 3 restaurants
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch2_questions.html">
+   Chapter 2 selected questions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 3
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chap03/ch3_comments.html">
+   Markov Decision Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chap03/ch3_questions.html">
+   Chapter 3 selected questions
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chap02/restaurant_too.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/main?urlpath=tree/docs/chap02/restaurant_too.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1.1 Multi-armed bandits: 3 restaurants
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-the-best-restaurant">
+     1.1.1 Defining the best restaurant
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#caveats">
+     1.1.2 Caveats
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#averages-or-sums">
+     1.1.3 Averages or sums?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#purely-explorative">
+   1.2 Purely Explorative
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#purely-exploitative">
+   1.3 Purely Exploitative
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-about-if-we-start-with-a-non-zero-average-value">
+   1.3.1 What about if we start with a non-zero average value?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#epsilon-greedy">
+   1.4 Epsilon Greedy
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>1.1 Multi-armed bandits: 3 restaurants</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1.1 Multi-armed bandits: 3 restaurants
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-the-best-restaurant">
+     1.1.1 Defining the best restaurant
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#caveats">
+     1.1.2 Caveats
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#averages-or-sums">
+     1.1.3 Averages or sums?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#purely-explorative">
+   1.2 Purely Explorative
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#purely-exploitative">
+   1.3 Purely Exploitative
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-about-if-we-start-with-a-non-zero-average-value">
+   1.3.1 What about if we start with a non-zero average value?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#epsilon-greedy">
+   1.4 Epsilon Greedy
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="multi-armed-bandits-3-restaurants">
+<h1>1.1 Multi-armed bandits: 3 restaurants<a class="headerlink" href="#multi-armed-bandits-3-restaurants" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we have a setup discussed on <a class="reference external" href="https://www.youtube.com/watch?v=e3L4VocZnnQ">YouTube</a> about a visiting professor spending 300 days in a new town. The professor wants to optimise their dining enjoyment of three restaurants. R1, R2 and R3. Each resturant will give an ‘average’ satisfaction for a meal with some distribution. The goal is to maximise the professors enjoyment and minimise their regret.</p>
+<p>I’m choosing this as it’s similar enough to the 10-armed bandit problem that the epsilon-greedy approaches can be looked at, but it is small enough that all the steps should be easy to follow</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">restaurant</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Parameters for the three restaurants. Mean and standard deviation&quot;&quot;&quot;</span>
+    <span class="n">m</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="c1">#Mean for each of the 3 restaurants</span>
+    <span class="n">s</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mf">2.5</span><span class="p">]</span> <span class="c1">#Standard deviation for each of the 3 restaurants</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_restaurant_dist</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Plot the distrubution of satisfaction of the three restaurants&quot;&quot;&quot;</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">restaurant</span><span class="p">()</span>
+    <span class="n">colour</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#648FFF&#39;</span><span class="p">,</span><span class="s1">&#39;#DC267F&#39;</span><span class="p">,</span><span class="s1">&#39;#FFB000&#39;</span><span class="p">]</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;solid&#39;</span><span class="p">,</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span><span class="s1">&#39;dashdot&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)):</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">_</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="p">[</span><span class="n">_</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">_</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">s</span><span class="p">[</span><span class="n">_</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">[</span><span class="n">_</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">_</span><span class="p">]),</span>
+                 <span class="n">color</span><span class="o">=</span><span class="n">colour</span><span class="p">[</span><span class="n">_</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Restaurant#&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">_</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+                <span class="n">linestyle</span><span class="o">=</span><span class="n">linestyle</span><span class="p">[</span><span class="n">_</span><span class="p">])</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Satisfaction&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we have the distributions of satisfactions for each restaurant. Restaurant 1 has an average satisfaction of 10, with a standard deviation of 5. Restaurant 2 has an average satisfaction of 8, with a standard deviation of 4. Restaurant 3 has an average satisfaction of 5, with a standard deviation of 2.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_restaurant_dist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/restaurant_too_6_0.png" src="../_images/restaurant_too_6_0.png" />
+</div>
+</div>
+<div class="section" id="defining-the-best-restaurant">
+<h2>1.1.1 Defining the best restaurant<a class="headerlink" href="#defining-the-best-restaurant" title="Permalink to this headline">¶</a></h2>
+<p>Here I want to point out that I’m defining the best restaurant as the one with the highest average, which in this case is restaurant’#’1. When I’m analysing if the optimal choice is made, here I am looking at if Restauran’#’1 was picked.</p>
+</div>
+<div class="section" id="caveats">
+<h2>1.1.2 Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h2>
+<p>I want to point out another caveat here. This is a stationary problem. We are assuming that the distributions of the satisfaction for each restaurant remain static (stationary) over time, and therefore information on the satisfaction we got on day 1 is just as relevant as information we got yesterday.</p>
+<p>If the problem is non-stationary then we need to weight more recent data higher than older data.</p>
+</div>
+<div class="section" id="averages-or-sums">
+<h2>1.1.3 Averages or sums?<a class="headerlink" href="#averages-or-sums" title="Permalink to this headline">¶</a></h2>
+<p>The satisfaction can be calculated in a number of ways, we can simply sum the satisfaction from each or we can keep track of the number of visits and get an average by dividing the sum by n, or we can work out the averages incrementally using the following equation:</p>
+<p>Qn+1 = Qn + 1/n(Rn-Qn)</p>
+<p>Where the new average of all rewards, Qn+1, is calcualted by the nth average, Qn, and the nth reward, Rn</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inc_av</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">R</span><span class="p">,</span><span class="n">Q</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Equation 2.3 in sutton and Barto&quot;&quot;&quot;</span>
+    <span class="n">newQ</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">R</span><span class="o">-</span><span class="n">Q</span><span class="p">))</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">newQ</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="purely-explorative">
+<h1>1.2 Purely Explorative<a class="headerlink" href="#purely-explorative" title="Permalink to this headline">¶</a></h1>
+<p>In this example the professor will split their time equally between the three restaurants. So if they are visiting for 100 days, they will visit each restaurant 100 times.
+I’m adding a bit of noise here, picking 300 random numbers between 1 and 3 (inclusive) but that will still on average give 100 visits per restaurant if we run the experiment enough times.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">explorative</span><span class="p">(</span><span class="n">nvis</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A purely explorative method. Where each resturant is just as likely as the other to be visited</span>
+<span class="sd">    regardless of the overall satisfaction that has been calculated.&quot;&quot;&quot;</span>
+    <span class="n">inc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">restaurant</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvis</span><span class="p">):</span>
+        <span class="n">pick</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">r</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+        <span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc_av</span><span class="p">(</span><span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">r</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">inc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exp_explore</span><span class="p">(</span><span class="n">nexp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
+    <span class="n">opt_total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nvis</span><span class="o">=</span><span class="mi">300</span>
+    <span class="n">sub_opt_total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nexp</span><span class="p">):</span>
+        <span class="n">av</span><span class="p">,</span> <span class="n">eachvis</span> <span class="o">=</span> <span class="n">explorative</span><span class="p">(</span><span class="n">nvis</span><span class="p">)</span>
+        <span class="n">opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sub_opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sub_opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">percent</span><span class="o">=</span><span class="p">(</span><span class="n">opt_total</span><span class="o">/</span><span class="p">(</span><span class="n">nexp</span><span class="o">*</span><span class="n">nvis</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span>
+    <span class="n">percent_subopt</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">sub_opt_total</span><span class="o">/</span><span class="p">(</span><span class="n">nvis</span><span class="o">*</span><span class="n">nexp</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Out of </span><span class="si">{</span><span class="n">nexp</span><span class="si">}</span><span class="s1"> experiments, each taking </span><span class="si">{</span><span class="n">nvis</span><span class="si">}</span><span class="s1"> days;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The optimal restaurant was correctly identified </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">percent</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">% of the time, based on the calculated mean&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The professor however, also spent </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">percent_subopt</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">% of their time at sub-optimal restaurants&#39;</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">percent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">explore_percent</span> <span class="o">=</span> <span class="n">exp_explore</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out of 1000 experiments, each taking 300 days;
+The optimal restaurant was correctly identified 33.2% of the time, based on the calculated mean
+The professor however, also spent 66.8% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perhaps unsuprisingly when a restaurant is sampled 100 times a realistic description of the (Gaussian) distribution can be found, this isn’t unexpected, but in this method around 2/3 of the time the professor was visiting a sub-optimal restaurant.</p>
+<p>Can we improve upon this?
+What about if we only ever go to the ‘best’ restaurant?</p>
+</div>
+<div class="section" id="purely-exploitative">
+<h1>1.3 Purely Exploitative<a class="headerlink" href="#purely-exploitative" title="Permalink to this headline">¶</a></h1>
+<p>In this example, we start with our estimation of the satisfaction from each restaurant as 0, then the professor picks one at random. If the professor has a positive visit there (that is a postive satisfaction) then the professor will exclusively visit there to eat, if the visit results in a negative satisfaction then another restaurant will be picked. We would also need to deal with ‘tie breakers’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tiebreak</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">dupe</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tiebreaker&quot;&quot;&quot;</span>
+    <span class="n">broken</span><span class="o">=</span><span class="kc">False</span>
+    <span class="k">while</span> <span class="n">broken</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">pick</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">broken</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">==</span> <span class="n">dupe</span>
+    <span class="k">return</span> <span class="n">pick</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exploit</span><span class="p">(</span><span class="n">nvis</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A purely exploitative method. Where the restaurant with the highest satisfaction is consistently picked&quot;&quot;&quot;</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">restaurant</span><span class="p">()</span>
+    <span class="n">inc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvis</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">pick</span> <span class="o">=</span> <span class="n">tiebreak</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+            <span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc_av</span><span class="p">(</span><span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">r</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pick</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+            <span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc_av</span><span class="p">(</span><span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">r</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">inc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exp_exploit</span><span class="p">(</span><span class="n">nexp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
+    <span class="n">opt_total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nvis</span><span class="o">=</span><span class="mi">300</span>
+    <span class="n">sub_opt_total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nexp</span><span class="p">):</span>
+        <span class="n">av</span><span class="p">,</span> <span class="n">eachvis</span> <span class="o">=</span> <span class="n">exploit</span><span class="p">(</span><span class="n">nvis</span><span class="p">)</span>
+        <span class="n">opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sub_opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sub_opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">percent</span><span class="o">=</span><span class="p">(</span><span class="n">opt_total</span><span class="o">/</span><span class="p">(</span><span class="n">nexp</span><span class="o">*</span><span class="n">nvis</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span>
+    <span class="n">percent_subopt</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">sub_opt_total</span><span class="o">/</span><span class="p">(</span><span class="n">nvis</span><span class="o">*</span><span class="n">nexp</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Using this greedy method, where we only visit the apparent best restuaruant, out of </span><span class="si">{</span><span class="n">nexp</span><span class="si">}</span><span class="s1"> trials&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The optimal restaurant was visited </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">percent</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">% of the time&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The professor however, spent </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">percent_subopt</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">% of their time at sub-optimal restaurants&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">percent</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exploit_percent</span> <span class="o">=</span> <span class="n">exp_exploit</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
+The optimal restaurant was visited 32.0% of the time
+The professor however, spent 68.0% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="what-about-if-we-start-with-a-non-zero-average-value">
+<h1>1.3.1 What about if we start with a non-zero average value?<a class="headerlink" href="#what-about-if-we-start-with-a-non-zero-average-value" title="Permalink to this headline">¶</a></h1>
+<p>Here we see that we only spend around a third of our time at the optimal restaurant, and this does seem to make sense. When we know nothing about the distributions and just pick one at random, as long as we don’t have a negative satisfaction there then we will keep going to it, as the other two restuarants will have a satisfaction of 0 still (because they haven’t been updated/visited) But what about if we start with an assumption that each restaurant will give us a satisfaction of 5, then we apply the greedy method?exploit_offset_start(nvis)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exploit_offset</span><span class="p">(</span><span class="n">nvis</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A purely exploitative method. Where the restaurant with the highest satisfaction is consistently picked</span>
+<span class="sd">    This time however we assume that all have an initial satisfaction (q) of whatever the offset is&quot;&quot;&quot;</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">restaurant</span><span class="p">()</span>
+    <span class="n">inc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">offset</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvis</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">pick</span> <span class="o">=</span> <span class="n">tiebreak</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+            <span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc_av</span><span class="p">(</span><span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">r</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pick</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+            <span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc_av</span><span class="p">(</span><span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">r</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">inc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exp_exploit_offset</span><span class="p">(</span><span class="n">nexp</span><span class="p">,</span><span class="n">offset</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
+    <span class="n">opt_total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nvis</span><span class="o">=</span><span class="mi">300</span>
+    <span class="n">sub_opt_total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nexp</span><span class="p">):</span>
+        <span class="n">av</span><span class="p">,</span> <span class="n">eachvis</span> <span class="o">=</span> <span class="n">exploit_offset</span><span class="p">(</span><span class="n">nvis</span><span class="p">,</span><span class="n">offset</span><span class="p">)</span>
+        <span class="n">opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sub_opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sub_opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">percent</span><span class="o">=</span><span class="p">(</span><span class="n">opt_total</span><span class="o">/</span><span class="p">(</span><span class="n">nexp</span><span class="o">*</span><span class="n">nvis</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span>
+    <span class="n">percent_subopt</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">sub_opt_total</span><span class="o">/</span><span class="p">(</span><span class="n">nvis</span><span class="o">*</span><span class="n">nexp</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Using this greedy method, where we only visit the apparent best restuaruant, out of </span><span class="si">{</span><span class="n">nexp</span><span class="si">}</span><span class="s1"> trials&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The optimal restaurant was visited </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">percent</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">% of the time&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The professor however, spent </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">percent_subopt</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">% of their time at sub-optimal restaurants&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">percent</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exploit_offset_2</span> <span class="o">=</span> <span class="n">exp_exploit_offset</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">exploit_offset_5</span> <span class="o">=</span> <span class="n">exp_exploit_offset</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">exploit_offset_10</span> <span class="o">=</span> <span class="n">exp_exploit_offset</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">exploit_offset_50</span> <span class="o">=</span> <span class="n">exp_exploit_offset</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
+The optimal restaurant was visited 35.2% of the time
+The professor however, spent 64.8% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
+The optimal restaurant was visited 51.7% of the time
+The professor however, spent 48.3% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
+The optimal restaurant was visited 69.7% of the time
+The professor however, spent 30.3% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
+The optimal restaurant was visited 70.2% of the time
+The professor however, spent 29.8% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="epsilon-greedy">
+<h1>1.4 Epsilon Greedy<a class="headerlink" href="#epsilon-greedy" title="Permalink to this headline">¶</a></h1>
+<p>In the epsilon greedy example, we try to balance the desire to explore (to get to know the distributions of the three restaurants sufficiently well) with the desire to exploit (to go to the restaurant that will give us the greatest satisfaction). The process here, is to pick a value of epsilon (say 10%) and for that percentage of the time of the professor’s visit, they will pick a restaurant at random. For the other 90% of the time in this case, they will visit the restaurant that they have calculated will give them the greatest satisfaction. Now this calculation may change after more visits to the three restaurants give a more realistic idea of their satisfaction. As with the exploitative method, we do need to pick a restaurant at random to start with.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">epsilon_greedy</span><span class="p">(</span><span class="n">nvis</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A mix of exploitative and exploratory methods. </span>
+<span class="sd">   There is a probability that even when some informaiton about the distribution of the satisfactions is known</span>
+<span class="sd">   that the algorithm will pick a random restaurant, not just the best one&quot;&quot;&quot;</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">restaurant</span><span class="p">()</span>
+    <span class="n">inc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvis</span><span class="p">):</span>
+        <span class="n">chkeps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">chkeps</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">):</span>
+            <span class="c1"># If the random number is greater than epsilon then pick a random restaurant</span>
+            <span class="n">pick</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc_av</span><span class="p">(</span><span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">r</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">list</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Deal with tiebreak</span>
+            <span class="n">pick</span> <span class="o">=</span> <span class="n">tiebreak</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+            <span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc_av</span><span class="p">(</span><span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">r</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Pick the best restaurant</span>
+            <span class="n">pick</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+            <span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">r</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc_av</span><span class="p">(</span><span class="n">inc</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span><span class="n">r</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="n">pick</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">inc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exp_eps_greedy</span><span class="p">(</span><span class="n">nexp</span><span class="p">,</span><span class="n">epsilon</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
+    <span class="n">nvis</span><span class="o">=</span><span class="mi">300</span>
+    <span class="n">sub_opt_total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">opt_total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nexp</span><span class="p">):</span>
+        <span class="n">av</span><span class="p">,</span> <span class="n">eachvis</span> <span class="o">=</span> <span class="n">epsilon_greedy</span><span class="p">(</span><span class="n">nvis</span><span class="p">,</span><span class="n">epsilon</span><span class="p">)</span>
+        <span class="n">opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sub_opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sub_opt_total</span> <span class="o">+=</span> <span class="n">eachvis</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">percent</span><span class="o">=</span><span class="p">(</span><span class="n">opt_total</span><span class="o">/</span><span class="p">(</span><span class="n">nexp</span><span class="o">*</span><span class="n">nvis</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span>
+    <span class="n">percent_subopt</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">sub_opt_total</span><span class="o">/</span><span class="p">(</span><span class="n">nvis</span><span class="o">*</span><span class="n">nexp</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Using this epsilon greedy method, with epsilon = </span><span class="si">{</span><span class="n">epsilon</span><span class="si">}</span><span class="s1">, and out of </span><span class="si">{</span><span class="n">nexp</span><span class="si">}</span><span class="s1"> trials&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The optimal restaurant was visited </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">percent</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">% of the time&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The professor however, spent </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">percent_subopt</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">% of their time at sub-optimal restaurants&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">percent</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eps_greedy_001</span> <span class="o">=</span> <span class="n">exp_eps_greedy</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">eps_greedy_01</span> <span class="o">=</span> <span class="n">exp_eps_greedy</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">eps_greedy_03</span> <span class="o">=</span> <span class="n">exp_eps_greedy</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">eps_greedy_05</span> <span class="o">=</span> <span class="n">exp_eps_greedy</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.01, and out of 1000 trials
+The optimal restaurant was visited 48.7% of the time
+The professor however, spent 51.3% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.1, and out of 1000 trials
+The optimal restaurant was visited 76.9% of the time
+The professor however, spent 23.1% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.3, and out of 1000 trials
+The optimal restaurant was visited 73.5% of the time
+The professor however, spent 26.5% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.5, and out of 1000 trials
+The optimal restaurant was visited 63.4% of the time
+The professor however, spent 36.6% of their time at sub-optimal restaurants
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;Explore&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Exploit&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Exploit offset = 2&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Exploit offset = 5&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Exploit offset = 10&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Exploit offset = 50&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Epsilon Greedy eps=0.01&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Epsilon Greedy eps=0.1&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Epsilon Greedy eps=0.3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Epsilon Greedy eps=0.5&#39;</span>
+    <span class="p">]</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">explore_percent</span><span class="p">,</span>
+    <span class="n">exploit_percent</span><span class="p">,</span>
+    <span class="n">exploit_offset_2</span><span class="p">,</span>
+    <span class="n">exploit_offset_5</span><span class="p">,</span>
+    <span class="n">exploit_offset_10</span><span class="p">,</span>
+    <span class="n">exploit_offset_50</span><span class="p">,</span>
+    <span class="n">eps_greedy_001</span><span class="p">,</span>
+    <span class="n">eps_greedy_01</span><span class="p">,</span>
+    <span class="n">eps_greedy_03</span><span class="p">,</span>
+    <span class="n">eps_greedy_05</span>
+        <span class="p">]</span>
+<span class="n">colour</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#648FFF&#39;</span><span class="p">,</span><span class="s1">&#39;#DC267F&#39;</span><span class="p">,</span><span class="s1">&#39;#DC267F&#39;</span><span class="p">,</span><span class="s1">&#39;#DC267F&#39;</span><span class="p">,</span><span class="s1">&#39;#DC267F&#39;</span><span class="p">,</span><span class="s1">&#39;#DC267F&#39;</span><span class="p">,</span><span class="s1">&#39;#FFB000&#39;</span><span class="p">,</span><span class="s1">&#39;#FFB000&#39;</span><span class="p">,</span><span class="s1">&#39;#FFB000&#39;</span><span class="p">,</span><span class="s1">&#39;#FFB000&#39;</span><span class="p">]</span>
+<span class="n">hatch</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="s1">&#39;+&#39;</span><span class="p">]</span>
+
+<span class="n">x_pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">x_pos</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colour</span><span class="p">,</span><span class="n">hatch</span><span class="o">=</span><span class="n">hatch</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Searching Method&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Percentage of time spent at optimal restaurant&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Percentage of visits to best restaurant after 1,000 experiments&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">x_pos</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/restaurant_too_28_0.png" src="../_images/restaurant_too_28_0.png" />
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chap02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../intro/install.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">What I understand about reinforcement learning</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch2_questions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 2 selected questions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Helen Duncan<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

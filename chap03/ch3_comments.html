@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markov Decision Processes &#8212; Reinforcement Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chapter 3 selected questions" href="ch3_questions.html" />
+    <link rel="prev" title="Chapter 2 selected questions" href="../chap02/ch2_questions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/abstract.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Reinforcement Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Reinforcement Learning: An overview:
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/install.html">
+   What I understand about reinforcement learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 2
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chap02/restaurant_too.html">
+   1.1 Multi-armed bandits: 3 restaurants
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chap02/ch2_questions.html">
+   Chapter 2 selected questions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 3
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Markov Decision Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch3_questions.html">
+   Chapter 3 selected questions
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chap03/ch3_comments.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nats-example">
+   3.1 NATS example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rewards">
+     3.1.1 Rewards
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#end-of-the-episode">
+     3.1.2 End of the Episode
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#markov-property">
+     3.1.3 Markov Property?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interatomic-potentials">
+   3.2 Interatomic Potentials
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Markov Decision Processes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nats-example">
+   3.1 NATS example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rewards">
+     3.1.1 Rewards
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#end-of-the-episode">
+     3.1.2 End of the Episode
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#markov-property">
+     3.1.3 Markov Property?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interatomic-potentials">
+   3.2 Interatomic Potentials
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="markov-decision-processes">
+<h1>Markov Decision Processes<a class="headerlink" href="#markov-decision-processes" title="Permalink to this headline">¶</a></h1>
+<p>This chapter dealt with finite Markov Decision Processes (MDP). It focuses on the interplay between the agent and the environment. The overall aim is to maximise the reward by having the agent act on the environment and change it’s state.
+One thing to note is the Markov property, that is that we only need the current state to define what will happen in the future of the system, and that the previous states do not have an effect. This would be true for the NATS example below (via judicious choice of parameters to model), or the result of rolling dice or tossing coins, but not true for something like a game of poker, as the state of the system (which cards are left) does depend on what has happened before, and as not all available cards are known, we cannot say that the system at time t is independent of its history.
+There’s actually a lot to process in this; in this case we can have episodic tasks (that have a definite end) and continuing tasks.
+An example of an episodic task would be managing two aircraft through a specific sector of airspace. Which is what is happening with the NATs project.</p>
+<div class="section" id="nats-example">
+<h2>3.1 NATS example<a class="headerlink" href="#nats-example" title="Permalink to this headline">¶</a></h2>
+<p>One of the projects I am working on is with NATS and is looking at generating a digital twin of UK airspace and using it to test agents in efficient ways to manage aircraft, just as an ATCO would. I think this example typifies an episodic MDP:
+The environment contains things such as, fixes, aircraft, routes.
+We can define metrics to measure agent performance by quantifying features such as aircraft separation, time spent on posted route, fuel efficiency. For each one of these metrics, a reward function needs to be defined. This is not trivial.
+In one second increments (in the NATS) example, the agent will give information to the aircraft - say increase flight level to 140 - and the environment will update accordingly and send back the state. The reward can then be calculated.
+In a first iteration the main focus is on avoiding a ‘loss of separation’ (crash). There are lateral and vertical limits on the aircraft separation.
+<img alt="Graph with Reward on the y axis, and lateral separation on the x axis. A red function is shown which is low for small lateral separation and then rises sharply at a point highlighted by a dashed line." src="../_images/example_nats_reward.png" />
+This image is an example of a reward function that could be used for the lateral separation. For high separation the reward is constant, say 0 in this case. At some point the threshold is crossed, in the case of NATS the lateral separation needs to be something like 5 nmi. This is shown as a dashed line on the graph. There is a sharp decrease in the reward function at this threshold before the function plateaus again. This may be okay, but in this context having planes 4.9 nmi away from each other is ‘as bad’ as having planes 0.1 nmi away from each other, instinctively this feels wrong. Perhaps the function could look like this:
+<img alt="Graph with Reward on the y axis, and lateral separation on the x axis. This is a modification of the graph above. A red function is shown which is high for high lateral separation, has a precipitous drop at some point highlighted by a dashed line, then continues to drop with decreasing lateral separation, low for small lateral separation and then rises sharply at a point highlighted by a dashed line." src="../_images/example_nats_reward_2.png" />
+We have the same behaviour above 5 nmi, which makes sense, we don’t want to send aircraft 100’s of nmi away from each other. But it also means that there is less ‘punishment’ for an aircraft that is 4.9 nmi from another, than there is for one that is 0.1 nmi from another, hence incentivising the agent to move the aircraft as far away from each other as possible, even if they end up less than 5 nmi away from each other.</p>
+<div class="section" id="rewards">
+<h3>3.1.1 Rewards<a class="headerlink" href="#rewards" title="Permalink to this headline">¶</a></h3>
+<p>Here the reward would be the sum of all rewards for each step as the aircraft traversed the airspace. In the example above the only real impetus is to keep the lateral distance of aircraft above 5 nmi, however we can add in additional reward functions that take into account fuel economy or deviation from plotted route (or both). This would alter the optimal action that could be taken. If we also care about fuel economy for example, as long as the planes stay more than 5 nmi apart the agent’s optimal action will then be to minimise fuel usage. But here’s where we come against an interesting ‘problem’. While maintaining separation is the most important thing. How to we weight other concerns? If we accidentally produce a reward function that is more weighted on fuel efficiency the ‘optimal’ action/state may be to have three aircraft inhabit the same volume of space!</p>
+</div>
+<div class="section" id="end-of-the-episode">
+<h3>3.1.2 End of the Episode<a class="headerlink" href="#end-of-the-episode" title="Permalink to this headline">¶</a></h3>
+<p>Just to point out that the NATs example lends itself nicely to being an episodic problem. Once the aircraft have left the sector then the simulation is over. However, in order to maintain continuity between continuous and episodic scenarios, the final step of an episode can be thought of as a step to ‘keep everything as is’ with a reward of zero. This is the absorbing state.</p>
+</div>
+<div class="section" id="markov-property">
+<h3>3.1.3 Markov Property?<a class="headerlink" href="#markov-property" title="Permalink to this headline">¶</a></h3>
+<p>A comment could be made that the state of the environment is dependent on its history (say if we are tracking the amount of fuel left in a plane) but actually it doesn’t matter how the aircraft ran down its fuel, only that at time t, the fuel level is known. Which it is.</p>
+</div>
+</div>
+<div class="section" id="interatomic-potentials">
+<h2>3.2 Interatomic Potentials<a class="headerlink" href="#interatomic-potentials" title="Permalink to this headline">¶</a></h2>
+<p>Another way in which the examples in the book corespond to my research history, is the search for viable interatomic potentials to describe group 2 oxides.
+In computational chemistry it is useful to have a computationally inexpensive way to model the interation between ionic pairs in solids. One of these ways is via a Buckingham interatomic potential. Where there are three individual parameters to fit, A, B, and C (although C is usually calculated as a constant and can be omitted). We can use a relatively inexpensive program, GULP, to calculate the energy of a bulk given a combination of the two interatomic potential parameters. This map (shown below) is similar to the gridworld example from chapter 3.
+<img alt="A blue/red colourmap of the energy profile of MgO, derived by GULP as a function of changing two interatomic potential parameters, shown in the graph as IP1 and IP2. The top right corner, with high IP1 and high IP2 is red, indicating high-energy structures, whereas the bottom left corner is blue, indicating low-energy structures." src="../_images/only_Fit_option.png" />
+Energy landscape of bulk MgO with changing A, and B, Buckingham potential parameters (IP1 and IP2 respectively).</p>
+<p>Each IP1/IP2 pair describes the state of the environment and the colour contour map is the value function for that point. The aim would be to minimise the value function</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chap03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../chap02/ch2_questions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 2 selected questions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch3_questions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 3 selected questions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Helen Duncan<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
