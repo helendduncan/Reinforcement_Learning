@@ -11,9 +11,10 @@ parts:
   
   - caption: Chapter 2
     chapters:
-    - file: chap02/restaurant_bandit
+    - file: chap02/restaurant_too
+    - file: chap02/ch2_questions
 
-  - caption: Using BlueBird
+  - caption: Chapter 3
     chapters:
-    - file: guides/digital-twin
-    - file: guides/agents
+    - file: chap03/ch3_comments
+    - file: chap03/ch3_questions
