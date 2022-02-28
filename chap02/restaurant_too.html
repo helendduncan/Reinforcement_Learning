@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Chapter 2 selected questions" href="ch2_questions.html" />
-    <link rel="prev" title="What I understand about reinforcement learning" href="../intro/install.html" />
+    <link rel="prev" title="Reinforcement Learning: An overview:" href="../intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -95,18 +95,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../intro.html">
    Reinforcement Learning: An overview:
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Getting started
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro/install.html">
-   What I understand about reinforcement learning
   </a>
  </li>
 </ul>
@@ -494,8 +482,8 @@ I’m adding a bit of noise here, picking 300 random numbers between 1 and 3 (in
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out of 1000 experiments, each taking 300 days;
-The optimal restaurant was correctly identified 33.2% of the time, based on the calculated mean
-The professor however, also spent 66.8% of their time at sub-optimal restaurants
+The optimal restaurant was correctly identified 33.3% of the time, based on the calculated mean
+The professor however, also spent 66.7% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 </div>
@@ -573,8 +561,8 @@ What about if we only ever go to the ‘best’ restaurant?</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 32.0% of the time
-The professor however, spent 68.0% of their time at sub-optimal restaurants
+The optimal restaurant was visited 31.2% of the time
+The professor however, spent 68.8% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 </div>
@@ -640,23 +628,23 @@ The professor however, spent 68.0% of their time at sub-optimal restaurants
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 35.2% of the time
-The professor however, spent 64.8% of their time at sub-optimal restaurants
+The optimal restaurant was visited 36.0% of the time
+The professor however, spent 64.0% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 51.7% of the time
-The professor however, spent 48.3% of their time at sub-optimal restaurants
+The optimal restaurant was visited 52.8% of the time
+The professor however, spent 47.2% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 69.7% of the time
-The professor however, spent 30.3% of their time at sub-optimal restaurants
+The optimal restaurant was visited 68.8% of the time
+The professor however, spent 31.2% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 70.2% of the time
-The professor however, spent 29.8% of their time at sub-optimal restaurants
+The optimal restaurant was visited 70.6% of the time
+The professor however, spent 29.4% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 </div>
@@ -732,23 +720,23 @@ The professor however, spent 29.8% of their time at sub-optimal restaurants
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.01, and out of 1000 trials
-The optimal restaurant was visited 48.7% of the time
-The professor however, spent 51.3% of their time at sub-optimal restaurants
+The optimal restaurant was visited 49.8% of the time
+The professor however, spent 50.2% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.1, and out of 1000 trials
-The optimal restaurant was visited 76.9% of the time
-The professor however, spent 23.1% of their time at sub-optimal restaurants
+The optimal restaurant was visited 77.3% of the time
+The professor however, spent 22.7% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.3, and out of 1000 trials
-The optimal restaurant was visited 73.5% of the time
-The professor however, spent 26.5% of their time at sub-optimal restaurants
+The optimal restaurant was visited 73.8% of the time
+The professor however, spent 26.2% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.5, and out of 1000 trials
-The optimal restaurant was visited 63.4% of the time
-The professor however, spent 36.6% of their time at sub-optimal restaurants
+The optimal restaurant was visited 63.5% of the time
+The professor however, spent 36.5% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 </div>
@@ -827,11 +815,11 @@ The professor however, spent 36.6% of their time at sub-optimal restaurants
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../intro/install.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">What I understand about reinforcement learning</p>
+            <p class="prev-next-title">Reinforcement Learning: An overview:</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="ch2_questions.html" title="next page">

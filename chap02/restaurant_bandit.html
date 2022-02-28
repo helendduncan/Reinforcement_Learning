@@ -98,18 +98,6 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Getting started
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro/install.html">
-   What I understand about reinforcement learning
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   Chapter 2
  </span>
 </p>
@@ -435,7 +423,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The satisfaction using a purely explorative method is 2143
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The satisfaction using a purely explorative method is 2266
 [100. 100. 100.]
 </pre></div>
 </div>
@@ -479,10 +467,10 @@ Restaurant 1 (yellow in the diagram) has the highest mean, but a large standard 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Based on a single visit to each; the professor will exclusively dine at Restaurant 1 which gave a satisfaction value of 10.56
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Based on a single visit to each; the professor will exclusively dine at Restaurant 1 which gave a satisfaction value of 6.63
 [1. 1. 1.]
 0
-The overall satisfaction using a purely exploitative method is 1395
+The overall satisfaction using a purely exploitative method is 1470
 [  1.   1. 298.]
 </pre></div>
 </div>
@@ -571,11 +559,11 @@ As with the exploitative method, we do need to start with one visit to each rest
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Based on one visit, the best restaurant is Restaurant #1
-The scores are: 15.07, 9.76, 8.07
-The total satisfaction after the inital 3 visits is 33
+The scores are: 6.05, -1.04, 5.92
+The total satisfaction after the inital 3 visits is 11
 At the end of their visit, the professor thinks Restaurant #2 is the best
-The professor visited restaurant #1 12 times, Restaurant #2 49 times and Restaurant #3 239 times
-Their satisfaction was 2497 using the epsilon-greedy method with epsilon = 10%
+The professor visited restaurant #1 13 times, Restaurant #2 190 times and Restaurant #3 97 times
+Their satisfaction was 2808 using the epsilon-greedy method with epsilon = 10%
 </pre></div>
 </div>
 </div>
@@ -636,12 +624,12 @@ Their satisfaction was 2497 using the epsilon-greedy method with epsilon = 10%
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The satisfaction using a purely explorative method is 2315
-The optimal restaurant was picked 37.0% of the time.
-2 [ 6.4765606  18.11232081 23.85719532]
-[ 6.4765606  18.11232081 23.85719532]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The satisfaction using a purely explorative method is 2230
+The optimal restaurant was picked 34.33% of the time.
+2 [ 6.40139747 15.42378154 16.10749902]
+[ 6.40139747 15.42378154 16.10749902]
 [  1.   1. 298.]
-The satisfaction using a purely explorative method is 3109
+The satisfaction using a purely explorative method is 3006
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
