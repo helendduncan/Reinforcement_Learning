@@ -20,12 +20,12 @@ exploit()
 ------------------
 
 ----- stdout -----
-The satisfaction using a purely explorative method is 2206
-The optimal restaurant was picked 28.33% of the time.
-2 [11.99066056 17.25041054 19.4632975 ]
-[11.99066056 17.25041054 19.4632975 ]
+The satisfaction using a purely explorative method is 2231
+The optimal restaurant was picked 34.33% of the time.
+2 [ 8.09451401 17.18194652 26.14599605]
+[ 8.09451401 17.18194652 26.14599605]
 [  1.   1. 298.]
-The satisfaction using a purely explorative method is 2898
+The satisfaction using a purely explorative method is 2930
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
