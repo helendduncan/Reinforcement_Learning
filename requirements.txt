@@ -5,5 +5,3 @@ numpy
 scipy
 scikit-learn
 gym
-random
-warnings
