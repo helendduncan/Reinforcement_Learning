@@ -18,3 +18,7 @@ parts:
     chapters:
     - file: chap03/ch3_comments
     - file: chap03/ch3_questions
+
+  - caption: Q-Learning
+    chapters:
+    - file: qlearning/qlearning
