@@ -423,7 +423,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.0143877   0.0257519   0.03480061 -0.00444718]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.02739998 -0.01106516 -0.00138917 -0.01150054]
 </pre></div>
 </div>
 </div>
@@ -466,7 +466,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The score is 38
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The score is 17
 The game ended due to one of the two failure conditions being met
 </pre></div>
 </div>
@@ -502,7 +502,7 @@ The game ended due to one of the two failure conditions being met
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/faf4e1fce04f1c1421f711f43a54fab660fb85371ce32c0d2b50b63bee5a9ba6.png" src="../_images/faf4e1fce04f1c1421f711f43a54fab660fb85371ce32c0d2b50b63bee5a9ba6.png" />
+<img alt="../_images/344fdaf54287f7b7ba736a1217595deecc6969fe9b40ad6198f063f39bbb6fb9.png" src="../_images/344fdaf54287f7b7ba736a1217595deecc6969fe9b40ad6198f063f39bbb6fb9.png" />
 </div>
 </div>
 <p>In the overwhelming majority of cases, the termination is due to the pole angle exceeding the allowed limits - which graphically would result in a series of points exiting the red rectangle at the top or bottom</p>
@@ -571,7 +571,7 @@ The game ended due to one of the two failure conditions being met
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4e0ef33c361ef6446fb5ce780204f577fd5ced3178c6823bcf0a7567e939eacf.png" src="../_images/4e0ef33c361ef6446fb5ce780204f577fd5ced3178c6823bcf0a7567e939eacf.png" />
+<img alt="../_images/607806974fde0503868c606338d57a61de08241eb7c2adf9616e3ab868576ac2.png" src="../_images/607806974fde0503868c606338d57a61de08241eb7c2adf9616e3ab868576ac2.png" />
 </div>
 </div>
 <p>After 1,000 trials it is confirmed that the termination cause for an untrained system is the pole angle exceeding the allowed limits.</p>
@@ -751,8 +751,8 @@ The game ended due to one of the two failure conditions being met
 <p>Now we run through the trials updating the q-tables for each episode</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_episodes</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">print_freq</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_episodes</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">print_freq</span> <span class="o">=</span> <span class="mi">150</span>
 <span class="n">score_card</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_episodes</span><span class="p">):</span>
     <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
@@ -796,22 +796,16 @@ The game ended due to one of the two failure conditions being met
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 0, Score = 15
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 0, Score = 16
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 100, Score = 70
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 150, Score = 221
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 200, Score = 211
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 300, Score = 213
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 300, Score = 164
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 400, Score = 208
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 500, Score = 215
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 450, Score = 179
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -823,50 +817,55 @@ The game ended due to one of the two failure conditions being met
 <span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="c1"># Update Q-Table</span>
 <span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="n">lr</span> <span class="o">=</span> <span class="n">learning_rate</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="nn">Cell In[10], line 25,</span> in <span class="ni">discretizer</span><span class="nt">(_, __, angle, pole_velocity)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span><span class="sd"> Convert continues state into a discrete state</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="nn">Cell In[10], line 26,</span> in <span class="ni">discretizer</span><span class="nt">(_, __, angle, pole_velocity)</span>
 <span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">KBinsDiscretizer</span><span class="p">(</span><span class="n">n_bins</span> <span class="o">=</span> <span class="n">n_bins</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span>                              <span class="n">encode</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span>                              <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">lower_bounds</span><span class="p">,</span> <span class="n">upper_bounds</span> <span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">estimator</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="n">angle</span><span class="p">,</span> <span class="n">pole_velocity</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">lower_bounds</span><span class="p">,</span> <span class="n">upper_bounds</span> <span class="p">])</span>
+<span class="ne">---&gt; </span><span class="mi">26</span> <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">estimator</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="n">angle</span><span class="p">,</span> <span class="n">pole_velocity</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]))</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/preprocessing/_discretization.py:204,</span> in <span class="ni">KBinsDiscretizer.fit</span><span class="nt">(self, X, y)</span>
-<span class="g g-Whitespace">    </span><span class="mi">186</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">187</span><span class="sd"> Fit the estimator.</span>
-<span class="g g-Whitespace">    </span><span class="mi">188</span><span class="sd"> </span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/utils/_set_output.py:140,</span> in <span class="ni">_wrap_method_output.&lt;locals&gt;.wrapped</span><span class="nt">(self, X, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span> <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">140</span>     <span class="n">data_to_wrap</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_to_wrap</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span>         <span class="c1"># only wrap the first output for cross decomposition</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span>         <span class="k">return</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span>             <span class="n">_wrap_data_with_container</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">data_to_wrap</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">145</span>             <span class="o">*</span><span class="n">data_to_wrap</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span>         <span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/preprocessing/_discretization.py:349,</span> in <span class="ni">KBinsDiscretizer.transform</span><span class="nt">(self, X)</span>
+<span class="g g-Whitespace">    </span><span class="mi">347</span> <span class="n">bin_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bin_edges_</span>
+<span class="g g-Whitespace">    </span><span class="mi">348</span> <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="ne">--&gt; </span><span class="mi">349</span>     <span class="n">Xt</span><span class="p">[:,</span> <span class="n">jj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">bin_edges</span><span class="p">[</span><span class="n">jj</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Xt</span><span class="p">[:,</span> <span class="n">jj</span><span class="p">],</span> <span class="n">side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">351</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span> <span class="o">==</span> <span class="s2">&quot;ordinal&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">352</span>     <span class="k">return</span> <span class="n">Xt</span>
+
+<span class="nn">File &lt;__array_function__ internals&gt;:200,</span> in <span class="ni">searchsorted</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/numpy/core/fromnumeric.py:1413,</span> in <span class="ni">searchsorted</span><span class="nt">(a, v, side, sorter)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1345</span> <span class="nd">@array_function_dispatch</span><span class="p">(</span><span class="n">_searchsorted_dispatcher</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1346</span> <span class="k">def</span> <span class="nf">searchsorted</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1347</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1348</span><span class="sd">     Find indices where elements should be inserted to maintain order.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1349</span><span class="sd"> </span>
 <span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">201</span><span class="sd">     Returns the instance itself.</span>
-<span class="g g-Whitespace">    </span><span class="mi">202</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">203</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_params</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">204</span> <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;numeric&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">206</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">in</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">207</span>     <span class="n">output_dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span>
+<span class="g g-Whitespace">   </span><span class="mi">1411</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1412</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1413</span>     <span class="k">return</span> <span class="n">_wrapfunc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;searchsorted&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="n">side</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="n">sorter</span><span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/base.py:548,</span> in <span class="ni">BaseEstimator._validate_data</span><span class="nt">(self, X, y, reset, validate_separately, **check_params)</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span> <span class="k">def</span> <span class="nf">_validate_data</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">484</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">485</span>     <span class="n">X</span><span class="o">=</span><span class="s2">&quot;no_validation&quot;</span><span class="p">,</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/numpy/core/fromnumeric.py:57,</span> in <span class="ni">_wrapfunc</span><span class="nt">(obj, method, *args, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="k">return</span> <span class="n">_wrapit</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">57</span>     <span class="k">return</span> <span class="n">bound</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="c1"># A TypeError occurs if the object does have such a method in its</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>     <span class="c1"># class, but its signature is not identical to that of NumPy&#39;s. This</span>
    <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">489</span>     <span class="o">**</span><span class="n">check_params</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">490</span> <span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">491</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Validate input data and set or check the `n_features_in_` attribute.</span>
-<span class="g g-Whitespace">    </span><span class="mi">492</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">493</span><span class="sd">     Parameters</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">546</span><span class="sd">         validated.</span>
-<span class="g g-Whitespace">    </span><span class="mi">547</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">548</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_feature_names</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">550</span>     <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tags</span><span class="p">()[</span><span class="s2">&quot;requires_y&quot;</span><span class="p">]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">551</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">552</span>             <span class="sa">f</span><span class="s2">&quot;This </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> estimator &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">553</span>             <span class="s2">&quot;requires y to be passed, but the target y is None.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">554</span>         <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="c1"># Call _wrapit from within the except clause to ensure a potential</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="c1"># exception has a traceback chain.</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="k">return</span> <span class="n">_wrapit</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -912,9 +911,6 @@ The game ended due to one of the two failure conditions being met
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/f3fa9e33696f83b356478047e068a92c5b81d7e99c279cb1822c565289ff7708.png" src="../_images/f3fa9e33696f83b356478047e068a92c5b81d7e99c279cb1822c565289ff7708.png" />
-</div>
 </div>
 <p>And if we look at the scores after each episode we should see an improvement in the score with increasing episode number. This corresponds to creating an optimal policy.</p>
 <p>If the optimal policy is found, then the score for later episodes should be 500, corresponding to a truncation-end of the simulation rather than a failure condition being met.</p>
@@ -932,9 +928,6 @@ The game ended due to one of the two failure conditions being met
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/7f9739b728ed7cdd12682a15f2a5214310be7cc675eed54ab4c48303e8af8703.png" src="../_images/7f9739b728ed7cdd12682a15f2a5214310be7cc675eed54ab4c48303e8af8703.png" />
 </div>
 </div>
 </section>

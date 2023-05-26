@@ -394,7 +394,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/31a9cde0ff7a6abbc647152c8c11274a4c0d10a31e941edb99a294bfd3ea3ca8.png" src="../_images/31a9cde0ff7a6abbc647152c8c11274a4c0d10a31e941edb99a294bfd3ea3ca8.png" />
+<img alt="../_images/68079426d54eb5034b790a084526bc9d24353e4f00a4fa4fa24b0d9ef394008e.png" src="../_images/68079426d54eb5034b790a084526bc9d24353e4f00a4fa4fa24b0d9ef394008e.png" />
 </div>
 </div>
 <p>The bandit_001 function returns the list of action values for the k-armed bandit. That is the values of q*(a) for each distribution.</p>
@@ -480,11 +480,11 @@ None
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.19767612  0.85513648 -1.58631225 -1.18313626 -1.35819401 -0.45676499
- -0.23501045 -0.00808605  1.30884283  0.96855221]
-After running for 1000 steps, the sample average for distribution 8 is 1.29, while the actual average is 1.31
-[ 0.19767612  0.85513648 -1.58631225 -1.18313626 -1.35819401 -0.45676499
- -0.23501045 -0.00808605  1.30884283  0.96855221]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.75203441 -0.39966182 -3.11192107 -1.91626849  1.43502523 -1.32817044
+ -0.23623705 -0.26226226  0.15359566 -0.98875978]
+After running for 1000 steps, the sample average for distribution 4 is 1.51, while the actual average is 1.44
+[-0.75203441 -0.39966182 -3.11192107 -1.91626849  1.43502523 -1.32817044
+ -0.23623705 -0.26226226  0.15359566 -0.98875978]
 </pre></div>
 </div>
 </div>
@@ -546,10 +546,10 @@ The function returns the new estimate, the list of the random numbers picked fro
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After 100 runs, the estimated average is 4.2, while the actual average is 4.3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After 100 runs, the estimated average is 4.3, while the actual average is 4.3
 </pre></div>
 </div>
-<img alt="../_images/92215a84858f9df1179ef957ee66e2df71b0e72beb931e1be792d877bed274a3.png" src="../_images/92215a84858f9df1179ef957ee66e2df71b0e72beb931e1be792d877bed274a3.png" />
+<img alt="../_images/2509ad4822c735b340e5972a21ba11a0543a91bbbda560bf2fbccf774e09419a.png" src="../_images/2509ad4822c735b340e5972a21ba11a0543a91bbbda560bf2fbccf774e09419a.png" />
 </div>
 </div>
 <p>Now instead of running this for just one target value, I want to run it for a range of target q*(a) values, specifically the ones I calculated/determined earlier in the page. Lets call this Bandit002</p>
@@ -602,29 +602,29 @@ The function returns the new estimate, the list of the random numbers picked fro
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.82, -0.16, -1.01, 0.3, -0.66, 0.44, 0.01, 0.48, 0.43, 0.72]
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
-0 0.7151510924226006
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 2.]
-1 0.7151510924226006
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 3.]
-2 0.7151510924226006
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 4.]
-3 0.7151510924226006
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 5.]
-4 0.7151510924226006
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 6.]
-5 0.7151510924226006
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 7.]
-6 0.7151510924226006
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 8.]
-7 0.7151510924226006
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 9.]
-8 0.7151510924226006
-[ 0.  0.  0.  0.  0.  0.  0.  0.  0. 10.]
-9 0.7151510924226006
-[-0.82, -0.16, -1.01, 0.3, -0.66, 0.44, 0.01, 0.48, 0.43, 0.72]
-0.7151510924226006 0.0 10.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.13, 1.4, -0.24, -1.17, -1.6, -3.43, 1.13, 0.63, -0.51, 0.94]
+[0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
+0 1.3999687346266307
+[0. 2. 0. 0. 0. 0. 0. 0. 0. 0.]
+1 1.3999687346266307
+[0. 3. 0. 0. 0. 0. 0. 0. 0. 0.]
+2 1.3999687346266307
+[0. 4. 0. 0. 0. 0. 0. 0. 0. 0.]
+3 1.3999687346266307
+[0. 5. 0. 0. 0. 0. 0. 0. 0. 0.]
+4 1.3999687346266307
+[0. 6. 0. 0. 0. 0. 0. 0. 0. 0.]
+5 1.3999687346266307
+[0. 7. 0. 0. 0. 0. 0. 0. 0. 0.]
+6 1.3999687346266307
+[0. 8. 0. 0. 0. 0. 0. 0. 0. 0.]
+7 1.3999687346266307
+[0. 9. 0. 0. 0. 0. 0. 0. 0. 0.]
+8 1.3999687346266307
+[ 0. 10.  0.  0.  0.  0.  0.  0.  0.  0.]
+9 1.3999687346266307
+[-1.13, 1.4, -0.24, -1.17, -1.6, -3.43, 1.13, 0.63, -0.51, 0.94]
+1.3999687346266307 0.0 10.0
 </pre></div>
 </div>
 </div>

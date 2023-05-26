@@ -30,7 +30,7 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['n_episodes = 1000', 'print_freq = 100', 'score_card = []', 'for e in range(n_episodes):', '    score = 0']
+['n_episodes = 500', 'print_freq = 150', 'score_card = []', 'for e in range(n_episodes):', '    score = 0']
 ...
 ['        score += reward', '            ', '    score_card.append(score)', '    if track_score:', '        print(f"At end of episode {e}, Score = {int(score)}")']
 -------------------
