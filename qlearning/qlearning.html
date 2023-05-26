@@ -423,7 +423,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.02850505  0.02604795  0.00652716 -0.0202053 ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.0143877   0.0257519   0.03480061 -0.00444718]
 </pre></div>
 </div>
 </div>
@@ -466,7 +466,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The score is 17
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The score is 38
 The game ended due to one of the two failure conditions being met
 </pre></div>
 </div>
@@ -502,7 +502,7 @@ The game ended due to one of the two failure conditions being met
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2f69ebbaf62e62b94e64616465a3a9ae08ef555780bf3299e8a90a0cdb4866fe.png" src="../_images/2f69ebbaf62e62b94e64616465a3a9ae08ef555780bf3299e8a90a0cdb4866fe.png" />
+<img alt="../_images/faf4e1fce04f1c1421f711f43a54fab660fb85371ce32c0d2b50b63bee5a9ba6.png" src="../_images/faf4e1fce04f1c1421f711f43a54fab660fb85371ce32c0d2b50b63bee5a9ba6.png" />
 </div>
 </div>
 <p>In the overwhelming majority of cases, the termination is due to the pole angle exceeding the allowed limits - which graphically would result in a series of points exiting the red rectangle at the top or bottom</p>
@@ -571,7 +571,7 @@ The game ended due to one of the two failure conditions being met
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9d672f3824f9dc4b0b415bb11e42473d61c113e906cdb590bcabda2145983471.png" src="../_images/9d672f3824f9dc4b0b415bb11e42473d61c113e906cdb590bcabda2145983471.png" />
+<img alt="../_images/4e0ef33c361ef6446fb5ce780204f577fd5ced3178c6823bcf0a7567e939eacf.png" src="../_images/4e0ef33c361ef6446fb5ce780204f577fd5ced3178c6823bcf0a7567e939eacf.png" />
 </div>
 </div>
 <p>After 1,000 trials it is confirmed that the termination cause for an untrained system is the pole angle exceeding the allowed limits.</p>
@@ -796,22 +796,22 @@ The game ended due to one of the two failure conditions being met
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 0, Score = 22
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 0, Score = 15
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 100, Score = 36
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 100, Score = 70
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 200, Score = 204
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 200, Score = 211
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 300, Score = 186
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 300, Score = 164
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 400, Score = 172
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 400, Score = 208
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 500, Score = 171
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 500, Score = 215
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -823,45 +823,50 @@ The game ended due to one of the two failure conditions being met
 <span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="c1"># Update Q-Table</span>
 <span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="n">lr</span> <span class="o">=</span> <span class="n">learning_rate</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="nn">Cell In[10], line 26,</span> in <span class="ni">discretizer</span><span class="nt">(_, __, angle, pole_velocity)</span>
+<span class="nn">Cell In[10], line 25,</span> in <span class="ni">discretizer</span><span class="nt">(_, __, angle, pole_velocity)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span><span class="sd"> Convert continues state into a discrete state</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span><span class="sd"> &quot;&quot;&quot;</span>
 <span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">KBinsDiscretizer</span><span class="p">(</span><span class="n">n_bins</span> <span class="o">=</span> <span class="n">n_bins</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span>                              <span class="n">encode</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span>                              <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">lower_bounds</span><span class="p">,</span> <span class="n">upper_bounds</span> <span class="p">])</span>
-<span class="ne">---&gt; </span><span class="mi">26</span> <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">estimator</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="n">angle</span><span class="p">,</span> <span class="n">pole_velocity</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">lower_bounds</span><span class="p">,</span> <span class="n">upper_bounds</span> <span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">estimator</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="n">angle</span><span class="p">,</span> <span class="n">pole_velocity</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]))</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/utils/_set_output.py:140,</span> in <span class="ni">_wrap_method_output.&lt;locals&gt;.wrapped</span><span class="nt">(self, X, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span> <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">140</span>     <span class="n">data_to_wrap</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_to_wrap</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span>         <span class="c1"># only wrap the first output for cross decomposition</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span>         <span class="k">return</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">144</span>             <span class="n">_wrap_data_with_container</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">data_to_wrap</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">145</span>             <span class="o">*</span><span class="n">data_to_wrap</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span>         <span class="p">)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/preprocessing/_discretization.py:204,</span> in <span class="ni">KBinsDiscretizer.fit</span><span class="nt">(self, X, y)</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span><span class="sd"> Fit the estimator.</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span><span class="sd">     Returns the instance itself.</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_params</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">204</span> <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;numeric&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">in</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span>     <span class="n">output_dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/preprocessing/_discretization.py:345,</span> in <span class="ni">KBinsDiscretizer.transform</span><span class="nt">(self, X)</span>
-<span class="g g-Whitespace">    </span><span class="mi">343</span> <span class="c1"># check input and attribute dtypes</span>
-<span class="g g-Whitespace">    </span><span class="mi">344</span> <span class="n">dtype</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span>
-<span class="ne">--&gt; </span><span class="mi">345</span> <span class="n">Xt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">347</span> <span class="n">bin_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bin_edges_</span>
-<span class="g g-Whitespace">    </span><span class="mi">348</span> <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/base.py:565,</span> in <span class="ni">BaseEstimator._validate_data</span><span class="nt">(self, X, y, reset, validate_separately, **check_params)</span>
-<span class="g g-Whitespace">    </span><span class="mi">563</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Validation should be done on X, y or both.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">564</span> <span class="k">elif</span> <span class="ow">not</span> <span class="n">no_val_X</span> <span class="ow">and</span> <span class="n">no_val_y</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">565</span>     <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">check_params</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">566</span>     <span class="n">out</span> <span class="o">=</span> <span class="n">X</span>
-<span class="g g-Whitespace">    </span><span class="mi">567</span> <span class="k">elif</span> <span class="n">no_val_X</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">no_val_y</span><span class="p">:</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/utils/validation.py:750,</span> in <span class="ni">check_array</span><span class="nt">(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator, input_name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">747</span> <span class="n">array_orig</span> <span class="o">=</span> <span class="n">array</span>
-<span class="g g-Whitespace">    </span><span class="mi">749</span> <span class="c1"># store whether originally we wanted numeric dtype</span>
-<span class="ne">--&gt; </span><span class="mi">750</span> <span class="n">dtype_numeric</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dtype</span> <span class="o">==</span> <span class="s2">&quot;numeric&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">752</span> <span class="n">dtype_orig</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">753</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dtype_orig</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">754</span>     <span class="c1"># not a data type (e.g. a column named dtype in a pandas DataFrame)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/base.py:548,</span> in <span class="ni">BaseEstimator._validate_data</span><span class="nt">(self, X, y, reset, validate_separately, **check_params)</span>
+<span class="g g-Whitespace">    </span><span class="mi">483</span> <span class="k">def</span> <span class="nf">_validate_data</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">484</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">485</span>     <span class="n">X</span><span class="o">=</span><span class="s2">&quot;no_validation&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">489</span>     <span class="o">**</span><span class="n">check_params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">490</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">491</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Validate input data and set or check the `n_features_in_` attribute.</span>
+<span class="g g-Whitespace">    </span><span class="mi">492</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span><span class="sd">     Parameters</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">546</span><span class="sd">         validated.</span>
+<span class="g g-Whitespace">    </span><span class="mi">547</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">548</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_feature_names</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">550</span>     <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tags</span><span class="p">()[</span><span class="s2">&quot;requires_y&quot;</span><span class="p">]:</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">552</span>             <span class="sa">f</span><span class="s2">&quot;This </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> estimator &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">553</span>             <span class="s2">&quot;requires y to be passed, but the target y is None.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">554</span>         <span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
