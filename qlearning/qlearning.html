@@ -423,7 +423,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.02739998 -0.01106516 -0.00138917 -0.01150054]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.03094095  0.00032505  0.04503506  0.00997144]
 </pre></div>
 </div>
 </div>
@@ -466,7 +466,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The score is 17
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The score is 16
 The game ended due to one of the two failure conditions being met
 </pre></div>
 </div>
@@ -502,7 +502,7 @@ The game ended due to one of the two failure conditions being met
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/344fdaf54287f7b7ba736a1217595deecc6969fe9b40ad6198f063f39bbb6fb9.png" src="../_images/344fdaf54287f7b7ba736a1217595deecc6969fe9b40ad6198f063f39bbb6fb9.png" />
+<img alt="../_images/e98b0812b474ee4e03561a5d95bf63e0a9342c51a52e055cb513b85da4a37a8f.png" src="../_images/e98b0812b474ee4e03561a5d95bf63e0a9342c51a52e055cb513b85da4a37a8f.png" />
 </div>
 </div>
 <p>In the overwhelming majority of cases, the termination is due to the pole angle exceeding the allowed limits - which graphically would result in a series of points exiting the red rectangle at the top or bottom</p>
@@ -571,7 +571,7 @@ The game ended due to one of the two failure conditions being met
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/607806974fde0503868c606338d57a61de08241eb7c2adf9616e3ab868576ac2.png" src="../_images/607806974fde0503868c606338d57a61de08241eb7c2adf9616e3ab868576ac2.png" />
+<img alt="../_images/778f96cc9afbadbfee170411eb09367fc1f2116a146a212a27451e9f30d168ed.png" src="../_images/778f96cc9afbadbfee170411eb09367fc1f2116a146a212a27451e9f30d168ed.png" />
 </div>
 </div>
 <p>After 1,000 trials it is confirmed that the termination cause for an untrained system is the pole angle exceeding the allowed limits.</p>
@@ -796,16 +796,13 @@ The game ended due to one of the two failure conditions being met
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 0, Score = 16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 0, Score = 24
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 150, Score = 221
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 150, Score = 209
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 300, Score = 213
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 450, Score = 179
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At end of episode 300, Score = 224
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -817,55 +814,35 @@ The game ended due to one of the two failure conditions being met
 <span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="c1"># Update Q-Table</span>
 <span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="n">lr</span> <span class="o">=</span> <span class="n">learning_rate</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="nn">Cell In[10], line 26,</span> in <span class="ni">discretizer</span><span class="nt">(_, __, angle, pole_velocity)</span>
+<span class="nn">Cell In[10], line 25,</span> in <span class="ni">discretizer</span><span class="nt">(_, __, angle, pole_velocity)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span><span class="sd"> Convert continues state into a discrete state</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span><span class="sd"> &quot;&quot;&quot;</span>
 <span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">KBinsDiscretizer</span><span class="p">(</span><span class="n">n_bins</span> <span class="o">=</span> <span class="n">n_bins</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span>                              <span class="n">encode</span><span class="o">=</span><span class="s1">&#39;ordinal&#39;</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span>                              <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">lower_bounds</span><span class="p">,</span> <span class="n">upper_bounds</span> <span class="p">])</span>
-<span class="ne">---&gt; </span><span class="mi">26</span> <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">estimator</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="n">angle</span><span class="p">,</span> <span class="n">pole_velocity</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">lower_bounds</span><span class="p">,</span> <span class="n">upper_bounds</span> <span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">estimator</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="n">angle</span><span class="p">,</span> <span class="n">pole_velocity</span><span class="p">]])[</span><span class="mi">0</span><span class="p">]))</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/utils/_set_output.py:140,</span> in <span class="ni">_wrap_method_output.&lt;locals&gt;.wrapped</span><span class="nt">(self, X, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span> <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">140</span>     <span class="n">data_to_wrap</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_to_wrap</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span>         <span class="c1"># only wrap the first output for cross decomposition</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span>         <span class="k">return</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">144</span>             <span class="n">_wrap_data_with_container</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">data_to_wrap</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">145</span>             <span class="o">*</span><span class="n">data_to_wrap</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span>         <span class="p">)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/preprocessing/_discretization.py:253,</span> in <span class="ni">KBinsDiscretizer.fit</span><span class="nt">(self, X, y)</span>
+<span class="g g-Whitespace">    </span><span class="mi">250</span>     <span class="k">continue</span>
+<span class="g g-Whitespace">    </span><span class="mi">252</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;uniform&quot;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">253</span>     <span class="n">bin_edges</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">col_min</span><span class="p">,</span> <span class="n">col_max</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;quantile&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span>     <span class="n">quantiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/sklearn/preprocessing/_discretization.py:349,</span> in <span class="ni">KBinsDiscretizer.transform</span><span class="nt">(self, X)</span>
-<span class="g g-Whitespace">    </span><span class="mi">347</span> <span class="n">bin_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bin_edges_</span>
-<span class="g g-Whitespace">    </span><span class="mi">348</span> <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-<span class="ne">--&gt; </span><span class="mi">349</span>     <span class="n">Xt</span><span class="p">[:,</span> <span class="n">jj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">bin_edges</span><span class="p">[</span><span class="n">jj</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Xt</span><span class="p">[:,</span> <span class="n">jj</span><span class="p">],</span> <span class="n">side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">351</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span> <span class="o">==</span> <span class="s2">&quot;ordinal&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">352</span>     <span class="k">return</span> <span class="n">Xt</span>
+<span class="nn">File &lt;__array_function__ internals&gt;:200,</span> in <span class="ni">linspace</span><span class="nt">(*args, **kwargs)</span>
 
-<span class="nn">File &lt;__array_function__ internals&gt;:200,</span> in <span class="ni">searchsorted</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/numpy/core/fromnumeric.py:1413,</span> in <span class="ni">searchsorted</span><span class="nt">(a, v, side, sorter)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1345</span> <span class="nd">@array_function_dispatch</span><span class="p">(</span><span class="n">_searchsorted_dispatcher</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1346</span> <span class="k">def</span> <span class="nf">searchsorted</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1347</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1348</span><span class="sd">     Find indices where elements should be inserted to maintain order.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1349</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1411</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1412</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1413</span>     <span class="k">return</span> <span class="n">_wrapfunc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;searchsorted&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="n">side</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="n">sorter</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/numpy/core/fromnumeric.py:57,</span> in <span class="ni">_wrapfunc</span><span class="nt">(obj, method, *args, **kwds)</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="k">return</span> <span class="n">_wrapit</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">57</span>     <span class="k">return</span> <span class="n">bound</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="c1"># A TypeError occurs if the object does have such a method in its</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span>     <span class="c1"># class, but its signature is not identical to that of NumPy&#39;s. This</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="c1"># Call _wrapit from within the except clause to ensure a potential</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="c1"># exception has a traceback chain.</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="k">return</span> <span class="n">_wrapit</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.16/x64/lib/python3.8/site-packages/numpy/core/function_base.py:124,</span> in <span class="ni">linspace</span><span class="nt">(start, stop, num, endpoint, retstep, dtype, axis)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of samples, </span><span class="si">%s</span><span class="s2">, must be non-negative.&quot;</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">124</span> <span class="n">div</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">endpoint</span> <span class="k">else</span> <span class="n">num</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span> <span class="c1"># Convert float/complex array scalars to float, gh-3504</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span> <span class="c1"># and make sure one can use variables that have an __array_interface__, gh-6634</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span> <span class="n">start</span> <span class="o">=</span> <span class="n">asanyarray</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
