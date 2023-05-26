@@ -1,352 +1,363 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>1.1 Multi-armed bandits: 3 restaurants &#8212; Reinforcement Learning</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chap02/restaurant_too';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Chapter 2 selected questions" href="ch2_questions.html" />
     <link rel="prev" title="Reinforcement Learning: An overview:" href="../intro.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/abstract.jpg" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Reinforcement Learning</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Reinforcement Learning: An overview:
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Chapter 2
- </span>
-</p>
+    
+    
+    <img src="../_static/abstract.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/abstract.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Reinforcement Learning: An overview:
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapter 2</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   1.1 Multi-armed bandits: 3 restaurants
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="ch2_questions.html">
-   Chapter 2 selected questions
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.1 Multi-armed bandits: 3 restaurants</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="ch2_questions.html">Chapter 2 selected questions</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Chapter 3
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapter 3</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../chap03/ch3_comments.html">
-   Markov Decision Processes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../chap03/ch3_questions.html">
-   Chapter 3 selected questions
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../chap03/ch3_comments.html">Markov Decision Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chap03/ch3_questions.html">Chapter 3 selected questions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Q-Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../qlearning/qlearning.html">Using Q-learning on a classic control problem</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/chap02/restaurant_too.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
         
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
-</div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+<div class="article-header-buttons">
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
+<a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/main?urlpath=tree/docs/chap02/restaurant_too.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
 
-        </div>
+</a>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   1.1 Multi-armed bandits: 3 restaurants
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#defining-the-best-restaurant">
-     1.1.1 Defining the best restaurant
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#caveats">
-     1.1.2 Caveats
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#averages-or-sums">
-     1.1.3 Averages or sums?
-    </a>
-   </li>
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chap02/restaurant_too.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#purely-explorative">
-   1.2 Purely Explorative
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#purely-exploitative">
-   1.3 Purely Exploitative
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-about-if-we-start-with-a-non-zero-average-value">
-   1.3.1 What about if we start with a non-zero average value?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#epsilon-greedy">
-   1.4 Epsilon Greedy
-  </a>
- </li>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.1 Multi-armed bandits: 3 restaurants</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.1 Multi-armed bandits: 3 restaurants</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-best-restaurant">1.1.1 Defining the best restaurant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caveats">1.1.2 Caveats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#averages-or-sums">1.1.3 Averages or sums?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#purely-explorative">1.2 Purely Explorative</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#purely-exploitative">1.3 Purely Exploitative</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-if-we-start-with-a-non-zero-average-value">1.3.1 What about if we start with a non-zero average value?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#epsilon-greedy">1.4 Epsilon Greedy</a></li>
 </ul>
 
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>1.1 Multi-armed bandits: 3 restaurants</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   1.1 Multi-armed bandits: 3 restaurants
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#defining-the-best-restaurant">
-     1.1.1 Defining the best restaurant
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#caveats">
-     1.1.2 Caveats
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#averages-or-sums">
-     1.1.3 Averages or sums?
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#purely-explorative">
-   1.2 Purely Explorative
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#purely-exploitative">
-   1.3 Purely Exploitative
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-about-if-we-start-with-a-non-zero-average-value">
-   1.3.1 What about if we start with a non-zero average value?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#epsilon-greedy">
-   1.4 Epsilon Greedy
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="multi-armed-bandits-3-restaurants">
-<h1>1.1 Multi-armed bandits: 3 restaurants<a class="headerlink" href="#multi-armed-bandits-3-restaurants" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="multi-armed-bandits-3-restaurants">
+<h1>1.1 Multi-armed bandits: 3 restaurants<a class="headerlink" href="#multi-armed-bandits-3-restaurants" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -364,7 +375,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">restaurant</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Parameters for the three restaurants. Mean and standard deviation&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameters for the three restaurants. Mean and standard deviation&quot;&quot;&quot;</span>
     <span class="n">m</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="c1">#Mean for each of the 3 restaurants</span>
     <span class="n">s</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mf">2.5</span><span class="p">]</span> <span class="c1">#Standard deviation for each of the 3 restaurants</span>
     <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span>
@@ -375,7 +386,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_restaurant_dist</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Plot the distrubution of satisfaction of the three restaurants&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the distrubution of satisfaction of the three restaurants&quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">restaurant</span><span class="p">()</span>
     <span class="n">colour</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#648FFF&#39;</span><span class="p">,</span><span class="s1">&#39;#DC267F&#39;</span><span class="p">,</span><span class="s1">&#39;#FFB000&#39;</span><span class="p">]</span>
     <span class="n">linestyle</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;solid&#39;</span><span class="p">,</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span><span class="s1">&#39;dashdot&#39;</span><span class="p">]</span>
@@ -401,43 +412,43 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/restaurant_too_6_0.png" src="../_images/restaurant_too_6_0.png" />
+<img alt="../_images/f72319b5e2ed001267db3bd26291ec0017963c4e38925983f76d41f0324c4ef3.png" src="../_images/f72319b5e2ed001267db3bd26291ec0017963c4e38925983f76d41f0324c4ef3.png" />
 </div>
 </div>
-<div class="section" id="defining-the-best-restaurant">
-<h2>1.1.1 Defining the best restaurant<a class="headerlink" href="#defining-the-best-restaurant" title="Permalink to this headline">¶</a></h2>
+<section id="defining-the-best-restaurant">
+<h2>1.1.1 Defining the best restaurant<a class="headerlink" href="#defining-the-best-restaurant" title="Permalink to this heading">#</a></h2>
 <p>Here I want to point out that I’m defining the best restaurant as the one with the highest average, which in this case is restaurant’#’1. When I’m analysing if the optimal choice is made, here I am looking at if Restauran’#’1 was picked.</p>
-</div>
-<div class="section" id="caveats">
-<h2>1.1.2 Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="caveats">
+<h2>1.1.2 Caveats<a class="headerlink" href="#caveats" title="Permalink to this heading">#</a></h2>
 <p>I want to point out another caveat here. This is a stationary problem. We are assuming that the distributions of the satisfaction for each restaurant remain static (stationary) over time, and therefore information on the satisfaction we got on day 1 is just as relevant as information we got yesterday.</p>
 <p>If the problem is non-stationary then we need to weight more recent data higher than older data.</p>
-</div>
-<div class="section" id="averages-or-sums">
-<h2>1.1.3 Averages or sums?<a class="headerlink" href="#averages-or-sums" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="averages-or-sums">
+<h2>1.1.3 Averages or sums?<a class="headerlink" href="#averages-or-sums" title="Permalink to this heading">#</a></h2>
 <p>The satisfaction can be calculated in a number of ways, we can simply sum the satisfaction from each or we can keep track of the number of visits and get an average by dividing the sum by n, or we can work out the averages incrementally using the following equation:</p>
 <p>Qn+1 = Qn + 1/n(Rn-Qn)</p>
 <p>Where the new average of all rewards, Qn+1, is calcualted by the nth average, Qn, and the nth reward, Rn</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inc_av</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">R</span><span class="p">,</span><span class="n">Q</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Equation 2.3 in sutton and Barto&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Equation 2.3 in sutton and Barto&quot;&quot;&quot;</span>
     <span class="n">newQ</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">R</span><span class="o">-</span><span class="n">Q</span><span class="p">))</span>
     <span class="k">return</span><span class="p">(</span><span class="n">newQ</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="purely-explorative">
-<h1>1.2 Purely Explorative<a class="headerlink" href="#purely-explorative" title="Permalink to this headline">¶</a></h1>
+</section>
+</section>
+<section id="purely-explorative">
+<h1>1.2 Purely Explorative<a class="headerlink" href="#purely-explorative" title="Permalink to this heading">#</a></h1>
 <p>In this example the professor will split their time equally between the three restaurants. So if they are visiting for 100 days, they will visit each restaurant 100 times.
 I’m adding a bit of noise here, picking 300 random numbers between 1 and 3 (inclusive) but that will still on average give 100 visits per restaurant if we run the experiment enough times.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">explorative</span><span class="p">(</span><span class="n">nvis</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A purely explorative method. Where each resturant is just as likely as the other to be visited</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A purely explorative method. Where each resturant is just as likely as the other to be visited</span>
 <span class="sd">    regardless of the overall satisfaction that has been calculated.&quot;&quot;&quot;</span>
     <span class="n">inc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">q</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -455,7 +466,7 @@ I’m adding a bit of noise here, picking 300 random numbers between 1 and 3 (in
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exp_explore</span><span class="p">(</span><span class="n">nexp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
     <span class="n">opt_total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">nvis</span><span class="o">=</span><span class="mi">300</span>
     <span class="n">sub_opt_total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -491,14 +502,14 @@ The professor however, also spent 66.7% of their time at sub-optimal restaurants
 <p>Perhaps unsuprisingly when a restaurant is sampled 100 times a realistic description of the (Gaussian) distribution can be found, this isn’t unexpected, but in this method around 2/3 of the time the professor was visiting a sub-optimal restaurant.</p>
 <p>Can we improve upon this?
 What about if we only ever go to the ‘best’ restaurant?</p>
-</div>
-<div class="section" id="purely-exploitative">
-<h1>1.3 Purely Exploitative<a class="headerlink" href="#purely-exploitative" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="purely-exploitative">
+<h1>1.3 Purely Exploitative<a class="headerlink" href="#purely-exploitative" title="Permalink to this heading">#</a></h1>
 <p>In this example, we start with our estimation of the satisfaction from each restaurant as 0, then the professor picks one at random. If the professor has a positive visit there (that is a postive satisfaction) then the professor will exclusively visit there to eat, if the visit results in a negative satisfaction then another restaurant will be picked. We would also need to deal with ‘tie breakers’</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tiebreak</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">dupe</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Tiebreaker&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tiebreaker&quot;&quot;&quot;</span>
     <span class="n">broken</span><span class="o">=</span><span class="kc">False</span>
     <span class="k">while</span> <span class="n">broken</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
         <span class="n">pick</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -511,7 +522,7 @@ What about if we only ever go to the ‘best’ restaurant?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exploit</span><span class="p">(</span><span class="n">nvis</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A purely exploitative method. Where the restaurant with the highest satisfaction is consistently picked&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A purely exploitative method. Where the restaurant with the highest satisfaction is consistently picked&quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">restaurant</span><span class="p">()</span>
     <span class="n">inc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">q</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -534,7 +545,7 @@ What about if we only ever go to the ‘best’ restaurant?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exp_exploit</span><span class="p">(</span><span class="n">nexp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
     <span class="n">opt_total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">nvis</span><span class="o">=</span><span class="mi">300</span>
     <span class="n">sub_opt_total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -561,20 +572,20 @@ What about if we only ever go to the ‘best’ restaurant?</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 31.2% of the time
-The professor however, spent 68.8% of their time at sub-optimal restaurants
+The optimal restaurant was visited 33.7% of the time
+The professor however, spent 66.3% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="what-about-if-we-start-with-a-non-zero-average-value">
-<h1>1.3.1 What about if we start with a non-zero average value?<a class="headerlink" href="#what-about-if-we-start-with-a-non-zero-average-value" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="what-about-if-we-start-with-a-non-zero-average-value">
+<h1>1.3.1 What about if we start with a non-zero average value?<a class="headerlink" href="#what-about-if-we-start-with-a-non-zero-average-value" title="Permalink to this heading">#</a></h1>
 <p>Here we see that we only spend around a third of our time at the optimal restaurant, and this does seem to make sense. When we know nothing about the distributions and just pick one at random, as long as we don’t have a negative satisfaction there then we will keep going to it, as the other two restuarants will have a satisfaction of 0 still (because they haven’t been updated/visited) But what about if we start with an assumption that each restaurant will give us a satisfaction of 5, then we apply the greedy method?exploit_offset_start(nvis)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exploit_offset</span><span class="p">(</span><span class="n">nvis</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A purely exploitative method. Where the restaurant with the highest satisfaction is consistently picked</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A purely exploitative method. Where the restaurant with the highest satisfaction is consistently picked</span>
 <span class="sd">    This time however we assume that all have an initial satisfaction (q) of whatever the offset is&quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">restaurant</span><span class="p">()</span>
     <span class="n">inc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -598,7 +609,7 @@ The professor however, spent 68.8% of their time at sub-optimal restaurants
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exp_exploit_offset</span><span class="p">(</span><span class="n">nexp</span><span class="p">,</span><span class="n">offset</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
     <span class="n">opt_total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">nvis</span><span class="o">=</span><span class="mi">300</span>
     <span class="n">sub_opt_total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -628,35 +639,35 @@ The professor however, spent 68.8% of their time at sub-optimal restaurants
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 36.0% of the time
-The professor however, spent 64.0% of their time at sub-optimal restaurants
+The optimal restaurant was visited 35.4% of the time
+The professor however, spent 64.6% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 52.8% of the time
-The professor however, spent 47.2% of their time at sub-optimal restaurants
+The optimal restaurant was visited 52.9% of the time
+The professor however, spent 47.1% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 68.8% of the time
-The professor however, spent 31.2% of their time at sub-optimal restaurants
+The optimal restaurant was visited 67.0% of the time
+The professor however, spent 33.0% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this greedy method, where we only visit the apparent best restuaruant, out of 1000 trials
-The optimal restaurant was visited 70.6% of the time
-The professor however, spent 29.4% of their time at sub-optimal restaurants
+The optimal restaurant was visited 69.4% of the time
+The professor however, spent 30.6% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="epsilon-greedy">
-<h1>1.4 Epsilon Greedy<a class="headerlink" href="#epsilon-greedy" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="epsilon-greedy">
+<h1>1.4 Epsilon Greedy<a class="headerlink" href="#epsilon-greedy" title="Permalink to this heading">#</a></h1>
 <p>In the epsilon greedy example, we try to balance the desire to explore (to get to know the distributions of the three restaurants sufficiently well) with the desire to exploit (to go to the restaurant that will give us the greatest satisfaction). The process here, is to pick a value of epsilon (say 10%) and for that percentage of the time of the professor’s visit, they will pick a restaurant at random. For the other 90% of the time in this case, they will visit the restaurant that they have calculated will give them the greatest satisfaction. Now this calculation may change after more visits to the three restaurants give a more realistic idea of their satisfaction. As with the exploitative method, we do need to pick a restaurant at random to start with.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">epsilon_greedy</span><span class="p">(</span><span class="n">nvis</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A mix of exploitative and exploratory methods. </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A mix of exploitative and exploratory methods. </span>
 <span class="sd">   There is a probability that even when some informaiton about the distribution of the satisfactions is known</span>
 <span class="sd">   that the algorithm will pick a random restaurant, not just the best one&quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">restaurant</span><span class="p">()</span>
@@ -690,7 +701,7 @@ The professor however, spent 29.4% of their time at sub-optimal restaurants
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">exp_eps_greedy</span><span class="p">(</span><span class="n">nexp</span><span class="p">,</span><span class="n">epsilon</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the experiment several times&quot;&quot;&quot;</span>
     <span class="n">nvis</span><span class="o">=</span><span class="mi">300</span>
     <span class="n">sub_opt_total</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">opt_total</span> <span class="o">=</span> <span class="mi">0</span>
@@ -720,23 +731,23 @@ The professor however, spent 29.4% of their time at sub-optimal restaurants
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.01, and out of 1000 trials
-The optimal restaurant was visited 49.8% of the time
-The professor however, spent 50.2% of their time at sub-optimal restaurants
+The optimal restaurant was visited 48.1% of the time
+The professor however, spent 51.9% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.1, and out of 1000 trials
-The optimal restaurant was visited 77.3% of the time
-The professor however, spent 22.7% of their time at sub-optimal restaurants
+The optimal restaurant was visited 76.8% of the time
+The professor however, spent 23.2% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.3, and out of 1000 trials
-The optimal restaurant was visited 73.8% of the time
-The professor however, spent 26.2% of their time at sub-optimal restaurants
+The optimal restaurant was visited 74.1% of the time
+The professor however, spent 25.9% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using this epsilon greedy method, with epsilon = 0.5, and out of 1000 trials
-The optimal restaurant was visited 63.5% of the time
-The professor however, spent 36.5% of their time at sub-optimal restaurants
+The optimal restaurant was visited 63.3% of the time
+The professor however, spent 36.7% of their time at sub-optimal restaurants
 </pre></div>
 </div>
 </div>
@@ -785,10 +796,10 @@ The professor however, spent 36.5% of their time at sub-optimal restaurants
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/restaurant_too_28_0.png" src="../_images/restaurant_too_28_0.png" />
+<img alt="../_images/2dbc347564ec0c11bfbd8eeceb1a965031fd8d200a58e0fdd83b4b23b5237151.png" src="../_images/2dbc347564ec0c11bfbd8eeceb1a965031fd8d200a58e0fdd83b4b23b5237151.png" />
 </div>
 </div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -802,7 +813,7 @@ The professor however, spent 36.5% of their time at sub-optimal restaurants
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./chap02"
         },
         predefinedOutput: true
@@ -810,44 +821,115 @@ The professor however, spent 36.5% of their time at sub-optimal restaurants
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Reinforcement Learning: An overview:</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Reinforcement Learning: An overview:</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="ch2_questions.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="ch2_questions.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Chapter 2 selected questions</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Helen Duncan<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.1 Multi-armed bandits: 3 restaurants</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-best-restaurant">1.1.1 Defining the best restaurant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caveats">1.1.2 Caveats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#averages-or-sums">1.1.3 Averages or sums?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#purely-explorative">1.2 Purely Explorative</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#purely-exploitative">1.3 Purely Exploitative</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-if-we-start-with-a-non-zero-average-value">1.3.1 What about if we start with a non-zero average value?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#epsilon-greedy">1.4 Epsilon Greedy</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Helen Duncan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
